@@ -162,7 +162,7 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:cityyData,
+		dataprovider:cityData,
 		onChange : function(option, checked) {
 		}
 	});
@@ -186,11 +186,11 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:countryData,
+		dataprovider:agentData,
 		onChange : function(option, checked) {
 		}
 	});
-	$('#agentsCombo').multiselect('dataprovider', countryData);
+	$('#agentsCombo').multiselect('dataprovider', agentData);
 	
 	$('#groupByCombo').multiselect({
 		includeSelectAllOption : true,
@@ -198,7 +198,7 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:countryData,
+		dataprovider:groupByData,
 		onChange : function(option, checked) {
 		}
 	});
