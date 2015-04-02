@@ -349,6 +349,7 @@ $(function() {
 		buttonClass : 'btn btn-default col-sm-12 btn-sm',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
+		butttonHeight : '34px',
 		nonSelectedText : "All",
 		dataprovider:selectorData,
 		onChange : function(option, checked) {
