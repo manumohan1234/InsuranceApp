@@ -173,6 +173,12 @@ var cityData = [
                     }
                 }
             ];
+var salesData =  [
+                  {"label":">","value":">"},
+                  {"label":"<","value":"<"},
+                  {"label":">=","value":">="},
+                  {"label":"<=","value":"<="}
+                 ];
 
 
 
@@ -298,8 +304,18 @@ $(function() {
     $("#datetimepicker7").on("dp.change", function (e) {
         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
     });
-
-    
+	
+    $('#salesCombo').multiselect({
+		includeSelectAllOption : true,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:salesData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#salesCombo').multiselect('dataprovider', salesData);
 });
 
 var barData = "";
