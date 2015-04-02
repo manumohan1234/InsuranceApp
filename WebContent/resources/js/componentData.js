@@ -30,6 +30,11 @@ var statusData = [{"label":"Approved","value":"Approved"},
                   {"label":"Cancelled","value":"Cancelled"},
                   {"label":"Pending","value":"Pending"}];
 
+var selectorData = [{"label":"Greater Than","value":"Greater Than"},
+                  	{"label":"Less Than","value":"Cancelled"},
+                  	{"label":"Greater Than & Equal To","value":"Greater Than & Equal To"},
+                  	{"label":"Less Than & Equal To","value":"Less Than & Equal To"}];
+
 
 var cityTempData = [
                     {
@@ -228,6 +233,12 @@ var cityData = [
                     }
                 }
             ];
+var salesData =  [
+                  {"label":">","value":">"},
+                  {"label":"<","value":"<"},
+                  {"label":">=","value":">="},
+                  {"label":"<=","value":"<="}
+                 ];
 
 
 
@@ -320,6 +331,30 @@ $(function() {
 		}
 	});
 	$('#statusCombo').multiselect('dataprovider', statusData);
+
+	/*$('#salesCombo').multiselect({
+		includeSelectAllOption : false,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:selectorData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#salesCombo').multiselect('dataprovider', selectorData);*/
+
+	$('#soldCombo').multiselect({
+		includeSelectAllOption : false,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:selectorData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#soldCombo').multiselect('dataprovider', selectorData);
 	
     $('#datetimepicker6').datetimepicker();
     $('#datetimepicker7').datetimepicker();
@@ -329,8 +364,18 @@ $(function() {
     $("#datetimepicker7").on("dp.change", function (e) {
         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
     });
-
-    
+	
+    $('#salesCombo').multiselect({
+		includeSelectAllOption : true,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:salesData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#salesCombo').multiselect('dataprovider', salesData);
 });
 
 var barData = "";
