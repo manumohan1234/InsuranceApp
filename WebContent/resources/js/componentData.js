@@ -11,6 +11,138 @@ var groupByData = [{"label":"Country", "value":"country"},
                    {"label":"Policy Type", "value":"policyType"},
                    {"label":"Agents", "value":"Agents"}];
 
+var policyData =  [{"label":"Medical","value":"Medical"},
+                   {"label":"Theft","value":"Theft"},
+                   {"label":"Life","value":"Life"}];
+
+var agentData = [{"label":"Sreehari", "value":"Sreehari"},
+                 {"label":"Vinay", "value":"Vinay"},
+                 {"label":"Manu", "value":"Manu"},
+                 {"label":"Sreekesh", "value":"Sreekesh"},
+                 {"label":"Vishnu", "value":"Vishnu"},
+                 {"label":"Arjun", "value":"Arjun"},
+                 {"label":"Ashwin", "value":"Ashwin"},
+                 {"label":"Jyothis", "value":"Jyothis"},
+                 {"label":"Varshah", "value":"Varshah"},
+                 {"label":"Karthika", "value":"Karthika"},];
+
+var cityData = [
+                {
+                    "country": {
+                        "label": "India",
+                        "value": "India",
+                        "cities": [
+                            {
+                                "label": "Trivandrum",
+                                "value": "Trivandrum"
+                            },
+                            {
+                                "label": "Banglore",
+                                "value": "Banglore"
+                            },
+                            {
+                                "label": "Mumbai",
+                                "value": "Mumbai"
+                            },
+                            {
+                                "label": "Hyderabad",
+                                "value": "Hyderabad"
+                            },
+                            {
+                                "label": "Pune",
+                                "value": "Pune"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "country": {
+                        "label": "USA",
+                        "value": "USA",
+                        "cities": [
+                            {
+                                "label": "New York",
+                                "value": "New York"
+                            },
+                            {
+                                "label": "Los Angeles",
+                                "value": "Los Angeles"
+                            },
+                            {
+                                "label": "Chicago",
+                                "value": "Chicago"
+                            },
+                            {
+                                "label": "Houston",
+                                "value": "Houston"
+                            },
+                            {
+                                "label": "San Francisco",
+                                "value": "San Francisco"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "country": {
+                        "label": "Italy",
+                        "value": "Italy",
+                        "cities": [
+                            {
+                                "label": "Rome",
+                                "value": "Rome"
+                            },
+                            {
+                                "label": "Venice",
+                                "value": "Venice"
+                            },
+                            {
+                                "label": "Milan",
+                                "value": "Milan"
+                            },
+                            {
+                                "label": "Naples",
+                                "value": "Naples"
+                            },
+                            {
+                                "label": "Florence",
+                                "value": "Florence"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "country": {
+                        "label": "France",
+                        "value": "France",
+                        "cities": [
+                            {
+                                "label": "Paris",
+                                "value": "Paris"
+                            },
+                            {
+                                "label": "Marseille",
+                                "value": "Marseille"
+                            },
+                            {
+                                "label": "Lyon",
+                                "value": "Lyon"
+                            },
+                            {
+                                "label": "Toulouse",
+                                "value": "Toulouse"
+                            },
+                            {
+                                "label": "Strasbourg",
+                                "value": "Strasbourg"
+                            }
+                        ]
+                    }
+                }
+            ];
+
+
+
 $(function() {
 	$('#countryCombo').multiselect({
 		includeSelectAllOption : true,
@@ -30,11 +162,11 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:countryData,
+		dataprovider:cityData,
 		onChange : function(option, checked) {
 		}
 	});
-	$('#cityCombo').multiselect('dataprovider', countryData);
+	$('#cityCombo').multiselect('dataprovider', cityData);
 	
 	$('#policyTypeCombo').multiselect({
 		includeSelectAllOption : true,
@@ -42,11 +174,11 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:countryData,
+		dataprovider:policyData,
 		onChange : function(option, checked) {
 		}
 	});
-	$('#policyTypeCombo').multiselect('dataprovider', countryData);
+	$('#policyTypeCombo').multiselect('dataprovider', policyData);
 	
 	$('#agentsCombo').multiselect({
 		includeSelectAllOption : true,
@@ -54,11 +186,11 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:countryData,
+		dataprovider:agentData,
 		onChange : function(option, checked) {
 		}
 	});
-	$('#agentsCombo').multiselect('dataprovider', countryData);
+	$('#agentsCombo').multiselect('dataprovider', agentData);
 	
 	$('#groupByCombo').multiselect({
 		includeSelectAllOption : true,
@@ -66,7 +198,7 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:countryData,
+		dataprovider:groupByData,
 		onChange : function(option, checked) {
 		}
 	});
