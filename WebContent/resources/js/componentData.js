@@ -26,6 +26,29 @@ var agentData = [{"label":"Sreehari", "value":"Sreehari"},
                  {"label":"Varshah", "value":"Varshah"},
                  {"label":"Karthika", "value":"Karthika"},];
 
+var cityTempData = [
+                    {
+                        "label": "Trivandrum",
+                        "value": "Trivandrum"
+                    },
+                    {
+                        "label": "Banglore",
+                        "value": "Banglore"
+                    },
+                    {
+                        "label": "Mumbai",
+                        "value": "Mumbai"
+                    },
+                    {
+                        "label": "Hyderabad",
+                        "value": "Hyderabad"
+                    },
+                    {
+                        "label": "Pune",
+                        "value": "Pune"
+                    }
+                ];
+
 var cityData = [
                 {
                     "country": {
@@ -152,6 +175,24 @@ $(function() {
 		nonSelectedText : "All",
 		dataprovider:countryData,
 		onChange : function(option, checked) {
+			var cities = $('#countryCombo option:selected');
+	        var selected = [];
+	        $(cities).each(function(index, brand){
+	            selected.push([$(this).val()]);
+	        });
+
+	        $('#cityCombo').multiselect('dataprovider', []);
+	        var cityValues = []; 
+	        for (var i = 0; i < selected.length; i++) {
+				for (var j = 0; j < cityData.length; j++) {
+					if(cityData[j].country.value == selected[i][0]) {
+						cityValues = cityValues.concat(cityData[j].country.cities);
+					}
+				}
+				
+			}
+	        $('#cityCombo').multiselect('dataprovider', cityValues);
+//			changeCity(option, checked);
 		}
 	});
 	$('#countryCombo').multiselect('dataprovider', countryData);
@@ -162,11 +203,10 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:cityData,
 		onChange : function(option, checked) {
 		}
 	});
-	$('#cityCombo').multiselect('dataprovider', cityData);
+	$('#cityCombo').multiselect('dataprovider', cityTempData);
 	
 	$('#policyTypeCombo').multiselect({
 		includeSelectAllOption : true,
@@ -232,11 +272,16 @@ google.setOnLoadCallback(drawChart);
 
 function drawChart() {
 
-	var pieChart = new google.visualization.PieChart(
-			document.getElementById('pie-chart_div'));
-	pieChart.draw(data, pieOptions);
+//	var pieChart = new google.visualization.PieChart(
+//			document.getElementById('pie-chart_div'));
+//	pieChart.draw(jsondata, pieOptions);
+//
+//	var barChart = new google.visualization.BarChart(
+//			document.getElementById('bar-chart_div'));
+//	barChart.draw(jsondata, barOptions);
+}
 
-	var barChart = new google.visualization.BarChart(
-			document.getElementById('bar-chart_div'));
-	barChart.draw(data, barOptions);
+function changeCity(option, checked) {
+	console.info(option);
+	console.info(checked);
 }
