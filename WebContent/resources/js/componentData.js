@@ -46,6 +46,66 @@ var cityTempData = [
                     {
                         "label": "Pune",
                         "value": "Pune"
+                    },
+                    {
+                        "label": "New York",
+                        "value": "New York"
+                    },
+                    {
+                        "label": "Los Angeles",
+                        "value": "Los Angeles"
+                    },
+                    {
+                        "label": "Chicago",
+                        "value": "Chicago"
+                    },
+                    {
+                        "label": "Houston",
+                        "value": "Houston"
+                    },
+                    {
+                        "label": "San Francisco",
+                        "value": "San Francisco"
+                    },
+                    {
+                        "label": "Rome",
+                        "value": "Rome"
+                    },
+                    {
+                        "label": "Venice",
+                        "value": "Venice"
+                    },
+                    {
+                        "label": "Milan",
+                        "value": "Milan"
+                    },
+                    {
+                        "label": "Naples",
+                        "value": "Naples"
+                    },
+                    {
+                        "label": "Florence",
+                        "value": "Florence"
+                    },
+                    {
+                        "label": "Paris",
+                        "value": "Paris"
+                    },
+                    {
+                        "label": "Marseille",
+                        "value": "Marseille"
+                    },
+                    {
+                        "label": "Lyon",
+                        "value": "Lyon"
+                    },
+                    {
+                        "label": "Toulouse",
+                        "value": "Toulouse"
+                    },
+                    {
+                        "label": "Strasbourg",
+                        "value": "Strasbourg"
                     }
                 ];
 
