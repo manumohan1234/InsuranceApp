@@ -7,3 +7,7 @@ body {
 	margin: 1%;
 	
 }
+
+.border_box {
+		border: 1px #e4e4e4 solid;
+	}

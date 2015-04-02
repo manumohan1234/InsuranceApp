@@ -18,6 +18,8 @@
 <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js"></script>
 <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 </head>
 <body>
 	<div class="container">
@@ -110,7 +112,10 @@
 		
 	</div>
 	<div id="chartContainerDiv" class="row">
-		
+		<div class="row" style="width: 100%; height: 30%;">
+		<div class="border_box" id="pie-chart_div" style="float: left; width: 45%; height: 100%; padding-left: 21px;"></div>
+		<div class="border_box" id="bar-chart_div" style="float: right;"></div>
+	</div>
 	</div>
 </body>
 <script src="resources/js/componentData.js"></script>

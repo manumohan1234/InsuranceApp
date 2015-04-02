@@ -81,3 +81,30 @@ $(function() {
         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
     });
 });
+
+var barData = "";
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', {
+	'packages' : [ 'corechart' ]
+});
+google.load("visualization", "1.1", {
+	packages : [ "bar" ]
+});
+google.load("visualization", "1.1", {
+	packages : [ "timeline" ]
+});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(drawChart);
+
+
+function drawChart() {
+
+	var pieChart = new google.visualization.PieChart(
+			document.getElementById('pie-chart_div'));
+	pieChart.draw(data, pieOptions);
+
+	var barChart = new google.visualization.BarChart(
+			document.getElementById('bar-chart_div'));
+	barChart.draw(data, barOptions);
+}
