@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta
+	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+	name='viewport'>
+
+<!-- Bootstrap 3.3.2 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<script src="policy.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<title>Proto2</title>
+
+<!--Load the jQuery-->
+<script src="http://code.jquery.com/jquery-latest.min.js"
+	type="text/javascript"></script>
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+	<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js"></script>
+	<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	var barData = "";
+	// Load the Visualization API and the piechart package.
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	google.load("visualization", "1.1", {
+		packages : [ "bar" ]
+	});
+	google.load("visualization", "1.1", {
+		packages : [ "timeline" ]
+	});
+
+	// Set a callback to run when the Google Visualization API is loaded.
+	google.setOnLoadCallback(drawChart);
+
+	// Callback that creates and populates a data table,
+	// instantiates the pie chart, passes in the data and
+	// draws it.
+
+	function drawChart() {
+
+// 		$
+// 				.getJSON(
+// 						'resources/test.json',
+// 						function(jsondata) {
+	
+
+							console.log("First Half");
+
+							var data = new google.visualization.DataTable();
+
+							data.addColumn('string', 'Type');
+							data.addColumn('number', 'Surrendered');
+							data.addColumn('number', 'Lapsed');
+							data.addColumn('number', 'Approved');
+							data.addColumn('number', 'Sold');
+
+							console.log("Second Half");
+
+							var vehicleSurr = 0;
+							var vehicleApproved = 0;
+							var vehicleSold = 0;
+							var vehicleLapsed = 0;
+
+							var medSurr = 0;
+							var medApproved = 0;
+							var medSold = 0;
+							var medLapsed = 0;
+
+							var lifSurr = 0;
+							var lifApproved = 0;
+							var lifSold = 0;
+							var lifLapsed = 0;
+
+							for (var i = 0; i < jsondata.policies.length; i++) {
+								/* console.log([ jsondata.policies[i].type,
+										jsondata.policies[i].sex, jsondata.policies[i].city,
+										jsondata.policies[i].status, jsondata.policies[i].agent ]); */
+
+								switch (jsondata.policies[i].type) {
+								case "Vehicle":
+									if (jsondata.policies[i].status == "surrendered")
+										vehicleSurr = vehicleSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										vehicleApproved = vehicleApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										vehicleSold = vehicleSold + 1;
+									else
+										vehicleLapsed = vehicleLapsed + 1;
+									break;
+								case "Medical":
+									if (jsondata.policies[i].status == "surrendered")
+										medSurr = medSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										medApproved = medApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										medSold = medSold + 1;
+									else
+										medLapsed = medLapsed + 1;
+									break;
+								case "Life":
+									if (jsondata.policies[i].status == "surrendered")
+										lifSurr = lifSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										lifApproved = lifApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										lifSold = lifSold + 1;
+									else
+										lifLapsed = lifLapsed + 1;
+									break;
+								}
+
+							}
+
+							data
+									.addRow([ "Vehicle", vehicleSurr,
+											vehicleLapsed, vehicleApproved,
+											vehicleSold ]);
+							data.addRow([ "Medical", medSurr, medLapsed,
+									medApproved, medSold ]);
+							data.addRow([ "Life", lifSurr, lifLapsed,
+									lifApproved, lifSold ]);
+
+							var sexWiseData = new google.visualization.DataTable();
+
+							sexWiseData.addColumn('string', 'Sex');
+							sexWiseData.addColumn('number', 'Surrendered');
+							sexWiseData.addColumn('number', 'Lapsed');
+							sexWiseData.addColumn('number', 'Approved');
+							sexWiseData.addColumn('number', 'Sold');
+
+							for (var i = 0; i < jsondata.policies.length; i++) {
+								/* console.log([ jsondata.policies[i].type,
+										jsondata.policies[i].sex, jsondata.policies[i].city,
+										jsondata.policies[i].status, jsondata.policies[i].agent ]); */
+
+								switch (jsondata.policies[i].type) {
+								case "male":
+									if (jsondata.policies[i].status == "surrendered")
+										vehicleSurr = vehicleSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										vehicleApproved = vehicleApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										vehicleSold = vehicleSold + 1;
+									else
+										vehicleLapsed = vehicleLapsed + 1;
+									break;
+								case "female":
+									if (jsondata.policies[i].status == "surrendered")
+										medSurr = medSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										medApproved = medApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										medSold = medSold + 1;
+									else
+										medLapsed = medLapsed + 1;
+									break;
+								}
+
+							}
+
+							sexWiseData
+									.addRow([ "Male", vehicleSurr,
+											vehicleLapsed, vehicleApproved,
+											vehicleSold ]);
+							sexWiseData.addRow([ "Female", medSurr, medLapsed,
+									medApproved, medSold ]);
+
+							var locWiseData = new google.visualization.DataTable();
+
+							locWiseData.addColumn('string', 'City');
+							locWiseData.addColumn('number', 'Surrendered');
+							locWiseData.addColumn('number', 'Lapsed');
+							locWiseData.addColumn('number', 'Approved');
+							locWiseData.addColumn('number', 'Sold');
+
+							for (var i = 0; i < jsondata.policies.length; i++) {
+								/* console.log([ jsondata.policies[i].type,
+										jsondata.policies[i].sex, jsondata.policies[i].city,
+										jsondata.policies[i].status, jsondata.policies[i].agent ]); */
+
+								switch (jsondata.policies[i].type) {
+								case "Calicut":
+									if (jsondata.policies[i].status == "surrendered")
+										vehicleSurr = vehicleSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										vehicleApproved = vehicleApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										vehicleSold = vehicleSold + 1;
+									else
+										vehicleLapsed = vehicleLapsed + 1;
+									break;
+								case "Trivandrum":
+									if (jsondata.policies[i].status == "surrendered")
+										medSurr = medSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										medApproved = medApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										medSold = medSold + 1;
+									else
+										medLapsed = medLapsed + 1;
+									break;
+								case "Kochi":
+									if (jsondata.policies[i].status == "surrendered")
+										lifSurr = lifSurr + 1;
+									else if (jsondata.policies[i].status == "approved")
+										lifApproved = lifApproved + 1;
+									else if (jsondata.policies[i].status == "sold")
+										lifSold = lifSold + 1;
+									else
+										lifLapsed = lifLapsed + 1;
+									break;
+								}
+
+							}
+
+							locWiseData
+									.addRow([ "Calicut", vehicleSurr,
+											vehicleLapsed, vehicleApproved,
+											vehicleSold ]);
+							locWiseData.addRow([ "Trivandrum", medSurr,
+							                     <span class="input-group-addon">To</span>
+							 	                <input type='text' class="form-control" />
+							 	                <span class="input-group-addon">
+							 	                    <span class="glyphicon glyphicon-calendar"></span>
+							 	                	medLapsed, medApproved, medSold ]);
+							locWiseData.addRow([ "Kochi", lifSurr, lifLapsed,
+									lifApproved, lifSold ]);
+
+							var agentData = new google.visualization.DataTable();
+
+							agentData.addColumn('string', 'Who');
+							agentData.addColumn('string', 'Agent Name');
+							agentData.addColumn('number', 'Id');
+							agentData.addColumn('number',
+									'No of  Policies Sold');
+
+							var freq = {};
+							for (var i = 0; i < jsondata.policies.length; i++) {
+								/* console.log([ jsondata.policies[i].type,
+										jsondata.policies[i].sex, jsondata.policies[i].city,
+										jsondata.policies[i].status, jsondata.policies[i].agent ]); */
+
+								var agent = jsondata.policies[i].agent;
+								if (freq[agent]) {
+									freq[agent]++;
+								} else {
+									freq[agent] = 1;
+								}
+							}
+
+							for (var i = 0, keys = Object.keys(freq), ii = keys.length; i < ii; i++) {
+								console.log('key : ' + keys[i] + ' val : '
+										+ freq[keys[i]]);
+								var feq = freq[keys[i]];
+								agentData.addRow([ "Agent Name", keys[i], 0, feq ]);
+							}
+
+							//agentData.addRow(["aaa",113,152]);
+
+							// Set chart options
+							var barOptions = {
+								'title' : 'Sales in a Look',
+								'width' : 700,
+								'height' : 400
+							};
+
+							var pieOptions = {
+								'title' : 'Sales By Type',
+								'width' : 500,
+								'height' : 400,
+								is3D : true
+							};
+							var dataViewOptions = {
+								title : 'Sales By Type',
+								width : 500,
+								height : 400
+							};
+
+							var options = {
+								title : "Policies by Gender",
+								width : '44%',
+								height : '100%',
+								axes : {
+									x : {
+										0 : {
+											side : 'top',
+											label : 'Gender'
+										}
+									// Top x-axis.
+									}
+								},
+								bar : {
+									groupWidth : "40%"
+								},
+								legend : {
+									position : "none"
+								}
+							};
+
+							var locoptions = {
+								title : 'Location wise Sale',
+								width : '47%',
+								height : '100%',
+								chart : {
+									subtitle : 'popularity by count'
+								},
+								legend : {
+									position : 'none'
+								},
+								axes : {
+									x : {
+										0 : {
+											side : 'top',
+											label : 'Cities'
+										}
+									// Top x-axis.
+									}
+								},
+								bar : {
+									groupWidth : "40%"
+								}
+							};
+							var timelineoptions = {
+								title : "Agents Performance",
+								width : '98%',
+								height : 170,
+								timeline : {
+									groupByRowLabel : true
+								}
+							};
+
+							// Instantiate and draw our chart, passing in some options.
+
+							var pieChart = new google.visualization.PieChart(
+									document.getElementById('pie-chart_div'));
+							pieChart.draw(data, pieOptions);
+
+							var barChart = new google.visualization.BarChart(
+									document.getElementById('bar-chart_div'));
+							barChart.draw(data, barOptions);
+
+							var dataViewChart = new google.charts.Bar(document.getElementById('dataview-chart_div'));
+							dataViewChart.draw(sexWiseData, google.charts.Bar.convertOptions(options));
+
+							var barView = new google.charts.Bar(document.getElementById('barview_div'));
+							barView.draw(locWiseData, google.charts.Bar.convertOptions(locoptions));
+
+							var timeLineView = new google.visualization.Timeline(
+									document.getElementById('timeline_div'));
+							timeLineView.draw(agentData, timelineoptions);
+
+// 						}
+// 						);
+	}
+</script>
+
+
+</head>
+<div class="container">
+	<div class="page-header">
+		
+		<p style="float: right;">Hi Admin<button type="button" class="btn btn-link">Logout</button></p>
+		<h3 style="color: grey;">Insurance Analytics Dashboard</h3>
+
+	</div>
+</div>
+
+<div class="container">
+    <div class="row">
+	</div>
+</div>
+
+
+
+<body class="skin-blue" style="border: solid 1px;margin: 10px;">
+	<style>
+	.border_box {
+		border: 1px #e4e4e4 solid;
+	}
+.chartdiv1 {
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-bottom: 10px; 
+	box-shadow : 0 0 15px black;
+	padding: 0 15px 0 15px;
+	box-shadow: 0 0 15px black;
+}
+
+.chartdiv2 {
+	margin-left: 50px;
+	margin-bottom: 10px;
+	box-shadow: 0 0 15px black;
+	padding: 0 15px 0 15px;
+}
+
+.chartdiv3 {
+	margin-top: 20px;
+	margin-right: 50px;
+	margin-bottom: 10px; 
+	box-shadow: 0 0 15px black;
+	padding: 0 15px 0 15px;
+}
+.chartdiv4 {
+	margin-top: 10px;
+	margin-left: 50px;
+	margin-bottom: 10px; 
+	box-shadow : 0 0 15px black;
+	padding: 0 15px 0 15px;
+	box-shadow: 0 0 15px black;
+}
+.chartdiv5 {
+	margin-top: 10px;
+	margin-left: 50px;
+	margin-bottom: 10px; 
+	box-shadow : 0 0 15px black;
+	padding: 0 15px 0 15px;
+	box-shadow: 0 0 15px black;
+}
+</style>
+<div class="container">
+<!-- 	<div class='col-md-2'> -->
+<!-- 		<span>Search by duration</span> -->
+<!-- 	</div> -->
+    <div class='col-md-3'>
+            <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+	            <span class="input-group-addon">From</span>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-3'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+            	<span class="input-group-addon">To</span>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+    	<button class="btn btn-default" type="button">Go</button>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker();
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+	<!--Divs that will hold the charts-->
+	<div class="row" style="width: 100%; height: 30%;">
+		<div class="border_box" id="pie-chart_div" style="float: left; width: 45%; height: 100%; padding-left: 21px;"></div>
+		<div class="border_box" id="bar-chart_div" style="float: right;"></div>
+	</div>
+	<div class="row" style="width: 100%; height: 30%;">
+<label style="float: left; width: 100%; padding-left: 21px;">Top 10 Agents</label>
+<button type="button" class="btn btn-default" style="float: right; ">View All</button> <br>
+<div id="timeline_div"  style="float: left; width: 100%; padding-left: 21px; padding-top:10px;"></div>
+</div>
+	<div class="row" style="width: 100%; height: 30%;">
+		<div class="border_box" id="dataview-chart_div" style="float: left; width: 45%; height: 100%; padding-left: 21px;"></div>
+		<div class="border_box" id="barview_div" style="float: right; width: 50%; height: 100%;"></div>
+	</div>
+
+</body>
+</html>

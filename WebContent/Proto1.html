@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insurance Report</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/bootstrap-multiselect.css">
+
+<!-- <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="resources/js/policy.js"></script>
+<script src="resources/js/bootstrap-multiselect.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js"></script>
+<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="container">
+		<div id="titleDiv" class="row page-header">
+			<p style="float: right;">Hi Admin<button type="button" class="btn btn-link">Logout</button></p>
+			<h3 style="color: grey;">Insurance Analytics Dashboard</h3>
+		</div>
+	</div>
+	<div id="filterContainerDiv">
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Select Country</span>
+					<select multiple="multiple"  data-hover="dropdown" data-toggle="dropdown" 
+						class="countries" id="countryCombo">
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="input-group">
+	  				<span class="input-group-addon" id="basic-addon1">Select City</span>
+					<select multiple="multiple"  data-hover="dropdown" data-toggle="dropdown" 
+					class="countries" id="cityCombo">
+				</select>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="input-group">
+	  				<span class="input-group-addon" id="basic-addon1">Select Policy Type</span>
+					<select multiple="multiple"  data-hover="dropdown" data-toggle="dropdown" 
+						class="countries" id="policyTypeCombo">
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Select Agents</span>
+					<select multiple="multiple"  data-hover="dropdown" data-toggle="dropdown" 
+						class="countries" id="agentsCombo">
+					</select>
+				</div>
+			</div>
+			<div class='col-sm-2'>
+	            <div class="form-group">
+		            <div class='input-group date' id='datetimepicker6'>
+			            <span class="input-group-addon">From</span>
+		                <input type='text' class="form-control" />
+		                <span class="input-group-addon">
+		                    <span class="glyphicon glyphicon-calendar"></span>
+		                </span>
+		            </div>
+	       		</div>
+	    	</div>
+	   		<div class='col-sm-2'>
+	        	<div class="form-group">
+	            	<div class='input-group date' id='datetimepicker7'>
+		            	<span class="input-group-addon">To</span>
+		                <input type='text' class="form-control" />
+		                <span class="input-group-addon">
+		                    <span class="glyphicon glyphicon-calendar"></span>
+		            	</span>
+	            	</div>
+	       		</div>
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Group by</span>
+					<select data-hover="dropdown" data-toggle="dropdown" 
+						class="groupby" id="groupByCombo">
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2" style="float: right;">
+				<button type="button" class="btn btn-primary">Generate report</button>
+			</div>
+			<div class="col-sm-2" style="float: right;">
+				<button type="button" class="btn btn-info">Reset Filters</button>
+			</div>
+			<div class="col-sm-2" style="float: right;">
+				<button type="button" class="btn btn-info">Export to Excel</button>
+			</div>
+			<div class="col-sm-2" style="float: right;">
+				<button type="button" class="btn btn-info">Export to PDF</button>
+			</div>
+		</div>
+		
+	</div>
+	<div id="chartContainerDiv" class="row">
+		
+	</div>
+</body>
+<script src="resources/js/componentData.js"></script>
+</html>
