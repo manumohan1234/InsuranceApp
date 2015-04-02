@@ -26,6 +26,11 @@ var agentData = [{"label":"Sreehari", "value":"Sreehari"},
                  {"label":"Varshah", "value":"Varshah"},
                  {"label":"Karthika", "value":"Karthika"},];
 
+var statusData = [{"label":"Approved","value":"Approved"},
+                  {"label":"Cancelled","value":"Cancelled"},
+                  {"label":"Pending","value":"Pending"}];
+
+
 var cityTempData = [
                     {
                         "label": "Trivandrum",
@@ -256,7 +261,7 @@ $(function() {
 		}
 	});
 	$('#countryCombo').multiselect('dataprovider', countryData);
-	
+
 	$('#cityCombo').multiselect({
 		includeSelectAllOption : true,
 		buttonClass : 'btn btn-default col-sm-12 btn-sm',
@@ -303,6 +308,18 @@ $(function() {
 		}
 	});
 	$('#groupByCombo').multiselect('dataprovider', groupByData);
+
+	$('#statusCombo').multiselect({
+		includeSelectAllOption : true,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:statusData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#statusCombo').multiselect('dataprovider', statusData);
 	
     $('#datetimepicker6').datetimepicker();
     $('#datetimepicker7').datetimepicker();
@@ -312,6 +329,8 @@ $(function() {
     $("#datetimepicker7").on("dp.change", function (e) {
         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
     });
+
+    
 });
 
 var barData = "";
