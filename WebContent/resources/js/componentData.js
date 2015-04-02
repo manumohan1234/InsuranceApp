@@ -15,25 +15,25 @@ var policyData =  [{"label":"Medical","value":"Medical"},
                    {"label":"Theft","value":"Theft"},
                    {"label":"Life","value":"Life"}];
 
-var agentData = [{"label":"Sreehari", "value":"Sreehari"},
-                 {"label":"Vinay", "value":"Vinay"},
-                 {"label":"Manu", "value":"Manu"},
-                 {"label":"Sreekesh", "value":"Sreekesh"},
-                 {"label":"Vishnu", "value":"Vishnu"},
-                 {"label":"Arjun", "value":"Arjun"},
-                 {"label":"Ashwin", "value":"Ashwin"},
-                 {"label":"Jyothis", "value":"Jyothis"},
-                 {"label":"Varshah", "value":"Varshah"},
-                 {"label":"Karthika", "value":"Karthika"},];
+var agentData = [{"label":"Agent 1", "value":"Agent 1"},
+                 {"label":"Agent 2", "value":"Agent 2"},
+                 {"label":"Agent 3", "value":"Agent 3"},
+                 {"label":"Agent 4", "value":"Agent 4"},
+                 {"label":"Agent 5", "value":"Agent 5"},
+                 {"label":"Agent 6", "value":"Agent 6"},
+                 {"label":"Agent 7", "value":"Agent 7"},
+                 {"label":"Agent 8", "value":"Agent 8"},
+                 {"label":"Agent 9", "value":"Agent 9"},
+                 {"label":"Agent 10", "value":"Agent 10"},];
 
 var statusData = [{"label":"Approved","value":"Approved"},
                   {"label":"Cancelled","value":"Cancelled"},
                   {"label":"Pending","value":"Pending"}];
 
-var selectorData = [{"label":"Greater Than","value":"Greater Than"},
-                  	{"label":"Less Than","value":"Cancelled"},
-                  	{"label":"Greater Than & Equal To","value":"Greater Than & Equal To"},
-                  	{"label":"Less Than & Equal To","value":"Less Than & Equal To"}];
+var selectorData = [ {"label":">","value":">"},
+                     {"label":"<","value":"<"},
+                     {"label":">=","value":">="},
+                     {"label":"<=","value":"<="}];
 
 
 var cityTempData = [
