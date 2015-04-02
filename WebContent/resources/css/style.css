@@ -1,13 +1,12 @@
 @CHARSET "UTF-8";
 
-body {
+.filtergroup {
 	width: 98%;
 	height: 98%;
 	border: solid 1px grey;
 	margin: 1%;
 	
 }
-
 .border_box {
 		border: 1px #e4e4e4 solid;
 	}

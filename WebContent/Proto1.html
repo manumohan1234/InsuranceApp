@@ -18,6 +18,7 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="resources/js/policy.js"></script>
 <script src="resources/js/bootstrap-multiselect.js"></script>
+<script src="resources/data/policies.js"></script>
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
@@ -49,11 +50,10 @@
 
 	
 	function drawChart() {
+		
+		
+		console.log("Data:"+jsondata);
 
- 		$
- 				.getJSON(
- 						'resources/test.json',
-						function(jsondata) {
 
 							var data = new google.visualization.DataTable();
 
@@ -140,8 +140,6 @@
 							var pieChart = new google.visualization.PieChart(
 									document.getElementById('pie-chart_div'));
 							pieChart.draw(data, pieOptions);
- 						}
-					);
 }
 	
 	function doGetFromResponse() {
@@ -150,15 +148,16 @@
 		var startdate = $('#startdate').val().substring(0, 2);
 		var enddate = $('#enddate').val().substring(0, 2);
 		
-		console.log("Start Date:"+ startdate+" To:"+enddate);
+		
 		
 		//console.log("Received Click for Policy Type:"+policytype.options[policytype.selectedIndex].text+" Gender:"+gender.options[gender.selectedIndex].text);
-		var query = new google.visualization.Query('/insurance/datatable');
+		var query = new google.visualization.Query('/InsuranceApp/datatable');
 		
 		
 		
 		if(startdate){
 			
+			console.log("Start Date:"+ startdate+" To:"+enddate);
 			var month = new Array();
 			month[01] = "Jan";
 			month[02] = "Feb";
@@ -221,16 +220,17 @@
 
 </head>
 <body>
-	<div class="container">
-		<div id="titleDiv" class="row page-header">
+	<div class="">
+		<div id="" style="padding-top: 10px;">
 			<p style="float: right;">
 				Hi Admin
 				<button type="button" class="btn btn-link">Logout</button>
 			</p>
-			<h3 style="color: grey;">Insurance Analytics Dashboard</h3>
+			<h3 style="color: grey; padding-left: 20px;">Insurance Analytics
+				Dashboard</h3>
 		</div>
 	</div>
-	<div id="filterContainerDiv">
+	<div id="filterContainerDiv" class="filtergroup">
 		<div class="row">
 			<div class="col-sm-2">
 				<div class="input-group">
