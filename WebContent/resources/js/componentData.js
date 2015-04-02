@@ -30,6 +30,11 @@ var statusData = [{"label":"Approved","value":"Approved"},
                   {"label":"Cancelled","value":"Cancelled"},
                   {"label":"Pending","value":"Pending"}];
 
+var selectorData = [{"label":"Greater Than","value":"Greater Than"},
+                  	{"label":"Less Than","value":"Cancelled"},
+                  	{"label":"Greater Than & Equal To","value":"Greater Than & Equal To"},
+                  	{"label":"Less Than & Equal To","value":"Less Than & Equal To"}];
+
 
 var cityTempData = [
                     {
@@ -260,6 +265,30 @@ $(function() {
 		}
 	});
 	$('#statusCombo').multiselect('dataprovider', statusData);
+
+	/*$('#salesCombo').multiselect({
+		includeSelectAllOption : false,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:selectorData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#salesCombo').multiselect('dataprovider', selectorData);*/
+
+	$('#soldCombo').multiselect({
+		includeSelectAllOption : false,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:selectorData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#soldCombo').multiselect('dataprovider', selectorData);
 	
     $('#datetimepicker6').datetimepicker();
     $('#datetimepicker7').datetimepicker();
