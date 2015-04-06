@@ -431,58 +431,87 @@ function drawChart() {
 //	barChart.draw(jsondata, barOptions);
 }
 
+var filterConditions = [];
 function generateReport () {
-	var filterConditions = [];
-	var countries = $('#countryCombo option:selected');
-	var cities = $('#cityCombo option:selected');
-	var policyTypes = $('#policyTypeCombo option:selected');
-	var selectedAgents = $('#agentsCombo option:selected');
+	filterConditions = [];
+	var countries = getSelectedComboValues($('#countryCombo option:selected'));
+	var cities = getSelectedComboValues($('#cityCombo option:selected'));
+	var policyTypes = getSelectedComboValues($('#policyTypeCombo option:selected'));
+	var selectedAgents = getSelectedComboValues($('#agentsCombo option:selected'));
 	var fromDate = $('#startdate').val();
 	var endDate = $('#enddate').val();
-	var groupBy = $('#groupByCombo option:selected');
-	var policyStatus = $('#statusCombo option:selected');
-	var selectedGender = $('#genderCombo option:selected');
-	var salesCount = $('#salesCombo option:selected');
-	var soldCount = $('#soldCombo option:selected');
+	var groupBy = getSelectedComboValues($('#groupByCombo option:selected'));
+	var policyStatus = getSelectedComboValues($('#statusCombo option:selected'));
+	var selectedGender = getSelectedComboValues($('#genderCombo option:selected'));
+	var salesCount = getSelectedComboValues($('#salesCombo option:selected'));
+	var soldCount = getSelectedComboValues($('#soldCombo option:selected'));
 	
-	if(countries.size()>0) {
-		filterConditions.push({"country":countries});
+	if(countries.length>0) {
+		filterConditions.push({"name":"country",
+								"value":countries});
 	}
-	if(cities.size()>0) {
-		filterConditions.push({"city":cities});
+	if(cities.length>0) {
+		filterConditions.push({"name":"city",
+			"value":cities});
 	}
-	if(policyTypes.size()>0) {
-		filterConditions.push({"country":policyTypes});
+	if(policyTypes.length>0) {
+		filterConditions.push({"name":"policy.type",
+			"value":policyTypes});
 	}
-	if(selectedAgents.size()>0) {
-		filterConditions.push({"country":selectedAgents});
+	if(selectedAgents.length>0) {
+		filterConditions.push({"name":"agent.name",
+			"value":selectedAgents});
 	}
 	if(fromDate.length>0) {
-		filterConditions.push({"policy.start_date":fromDate});
+		filterConditions.push({"name":"policy.start_date",
+			"value":fromDate});
 	}
 	if(endDate.length>0) {
-		filterConditions.push({"policy.end_date":endDate});
+		filterConditions.push({"name":"policy.end_date",
+			"value":endDate});
 	}
-	if(groupBy.size()>0) {
-		filterConditions.push({"groupBy":groupBy});
+	if(groupBy.length>0) {
+		filterConditions.push({"name":"groupBy",
+			"value":groupBy});
 	}
-	if(policyStatus.size()>0) {
-		filterConditions.push({"policy.status":policyStatus});
+	if(policyStatus.length>0) {
+		filterConditions.push({"name":"policy.status",
+			"value":policyStatus});
 	}
-	if(selectedGender.size()>0) {
-		filterConditions.push({"gender":selectedGender});
+	if(selectedGender.length>0) {
+		filterConditions.push({"name":"gender",
+			"value":selectedGender});
 	}
-	if(salesCount.size()>0) {
-		filterConditions.push({"agent.sales":salesCount});
+	if(salesCount.length>0) {
+		filterConditions.push({"name":"agent.sales",
+			"value":salesCount});
 	}
-	if(soldCount.size()>0) {
-		filterConditions.push({"agent.sold":soldCount});
+	if(soldCount.length>0) {
+		filterConditions.push({"name":"agent.sold",
+			"value":soldCount});
 	}
-	
-	var results = jQuery.grep(jsonData, function( a ) {
-		  return a.country == "USA";
+	console.info(filterConditions);
+	var results = jsonData;
+	$.each(filterConditions, function(i, filter){
+		results = jQuery.grep(results, function( object ) {
+			if($.isArray(filter.value) != -1) {
+				if($.inArray(object[filter.name],filter.value)) {
+					return object;
+				}
+			} else {
+				return object[filter.name] == filter.value;
+			}
 		});
+	});
 	console.log(results);
+}
+
+function getSelectedComboValues(options) {
+	var selected = [];
+    $(options).each(function(index, option){
+        selected.push([$(this).val()]);
+    });
+    return selected;
 }
 
 function changeCity(option, checked) {
