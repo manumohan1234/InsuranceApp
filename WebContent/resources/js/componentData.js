@@ -382,8 +382,12 @@ $(function() {
 	
 	$('#soldCombo').multiselect('dataprovider', selectorData);
 	
-    $('#datetimepicker6').datetimepicker();
-    $('#datetimepicker7').datetimepicker();
+    $('#datetimepicker6').datetimepicker({
+        defaultDate: "01/01/2015"
+    });
+    $('#datetimepicker7').datetimepicker({
+        defaultDate: "06/04/2015"
+    });
     $("#datetimepicker6").on("dp.change", function (e) {
         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
     });
