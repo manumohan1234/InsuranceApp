@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.visualization.datasource.DataSourceServlet;
+import com.google.visualization.datasource.base.DataSourceException;
 import com.google.visualization.datasource.base.TypeMismatchException;
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.DataTable;
@@ -15,6 +16,7 @@ public class Gds extends DataSourceServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Override
 	public DataTable generateDataTable(Query query, HttpServletRequest request) {
 		
 		System.out.println("Request at Google Data Source Servlet");
@@ -62,6 +64,13 @@ public class Gds extends DataSourceServlet {
 	  protected boolean isRestrictedAccessMode() { 
 	    return false; 
 	  }
+
+//	@Override
+	/*public DataTable generateDataTable(Query arg0, HttpServletRequest arg1)
+			throws DataSourceException {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 
 }
 
