@@ -30,7 +30,7 @@ var jsonData = [
             "policy": {
                 "type": "Medical",
                 "start_date": "30-April-2015",
-                "end_date": "20-Februaru-2018",
+                "end_date": "20-February-2018",
                 "status": "lapsed"
             },
           "agent": {
