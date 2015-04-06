@@ -338,7 +338,7 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
-		dataprovider:groupByData,
+		dataprovider:genderData,
 		onChange : function(option, checked) {
 		}
 	});
@@ -374,7 +374,7 @@ $(function() {
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		butttonHeight :'34px',
-		nonSelectedText : "All",
+		nonSelectedText : "=",
 		dataprovider:selectorData,
 		onChange : function(option, checked) {
 		}
@@ -396,7 +396,7 @@ $(function() {
 		buttonClass : 'btn btn-default col-sm-12 btn-sm',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
-		nonSelectedText : "All",
+		nonSelectedText : "=",
 		dataprovider:salesData,
 		onChange : function(option, checked) {
 		}
