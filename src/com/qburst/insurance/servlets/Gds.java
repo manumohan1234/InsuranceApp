@@ -64,14 +64,6 @@ public class Gds extends DataSourceServlet {
 	  protected boolean isRestrictedAccessMode() { 
 	    return false; 
 	  }
-
-//	@Override
-	/*public DataTable generateDataTable(Query arg0, HttpServletRequest arg1)
-			throws DataSourceException {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
 }
 
 /*data.addRowFromValues("Medical", "XYZ Corp", "Male");
