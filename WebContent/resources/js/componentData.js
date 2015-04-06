@@ -368,10 +368,9 @@ $(function() {
 
 	$('#soldCombo').multiselect({
 		includeSelectAllOption : false,
-		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		buttonClass : 'btn btn-default col-sm-12 btn-sm btn-height',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
-		butttonHeight : '34px',
 		nonSelectedText : "All",
 		dataprovider:selectorData,
 		onChange : function(option, checked) {
@@ -391,7 +390,7 @@ $(function() {
 	
     $('#salesCombo').multiselect({
 		includeSelectAllOption : true,
-		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		buttonClass : 'btn btn-default col-sm-12 btn-sm btn-height',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",

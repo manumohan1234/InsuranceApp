@@ -15,3 +15,11 @@ body {
 .border_box {
 	border: 1px #e4e4e4 solid;
 }
+
+.input-group-addon {
+	padding: 6px 5px;
+}
+
+.btn-height {
+	height: 34px;
+}
