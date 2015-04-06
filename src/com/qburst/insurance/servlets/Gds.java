@@ -16,6 +16,7 @@ public class Gds extends DataSourceServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Override
 	public DataTable generateDataTable(Query query, HttpServletRequest request) {
 		
 		System.out.println("Request at Google Data Source Servlet");
@@ -64,12 +65,12 @@ public class Gds extends DataSourceServlet {
 	    return false; 
 	  }
 
-	@Override
-	public DataTable generateDataTable(Query arg0, HttpServletRequest arg1)
+//	@Override
+	/*public DataTable generateDataTable(Query arg0, HttpServletRequest arg1)
 			throws DataSourceException {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }
 

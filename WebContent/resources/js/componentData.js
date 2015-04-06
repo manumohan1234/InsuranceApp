@@ -11,6 +11,9 @@ var groupByData = [{"label":"Country", "value":"country"},
                    {"label":"Policy Type", "value":"policyType"},
                    {"label":"Agents", "value":"Agents"}];
 
+var genderData = [{"label":"Male", "value":"male"},
+                   {"label":"Female", "value":"female"}];
+
 var policyData =  [{"label":"Medical","value":"Medical"},
                    {"label":"Theft","value":"Theft"},
                    {"label":"Life","value":"Life"}];
@@ -240,8 +243,6 @@ var salesData =  [
                   {"label":"<=","value":"<="}
                  ];
 
-
-
 $(function() {
 	$('#countryCombo').multiselect({
 		includeSelectAllOption : true,
@@ -304,6 +305,14 @@ $(function() {
 		nonSelectedText : "All",
 		dataprovider:agentData,
 		onChange : function(option, checked) {
+			var selectedAgents = $('#agentsCombo option:selected');
+			if(selectedAgents.size() > 0) {
+				$("#salesFilterDiv").show();
+				$("#soldFilterDiv").show();
+			} else {
+				$("#salesFilterDiv").hide();
+				$("#soldFilterDiv").hide();
+			}
 		}
 	});
 	$('#agentsCombo').multiselect('dataprovider', agentData);
@@ -319,6 +328,18 @@ $(function() {
 		}
 	});
 	$('#groupByCombo').multiselect('dataprovider', groupByData);
+	
+	$('#genderCombo').multiselect({
+		includeSelectAllOption : true,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider:groupByData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#genderCombo').multiselect('dataprovider', genderData);
 
 	$('#statusCombo').multiselect({
 		includeSelectAllOption : true,
@@ -355,6 +376,7 @@ $(function() {
 		onChange : function(option, checked) {
 		}
 	});
+	
 	$('#soldCombo').multiselect('dataprovider', selectorData);
 	
     $('#datetimepicker6').datetimepicker();
@@ -377,6 +399,9 @@ $(function() {
 		}
 	});
 	$('#salesCombo').multiselect('dataprovider', salesData);
+	
+	$("#salesFilterDiv").hide();
+	$("#soldFilterDiv").hide();
 });
 
 var barData = "";
@@ -404,6 +429,60 @@ function drawChart() {
 //	var barChart = new google.visualization.BarChart(
 //			document.getElementById('bar-chart_div'));
 //	barChart.draw(jsondata, barOptions);
+}
+
+function generateReport () {
+	var filterConditions = [];
+	var countries = $('#countryCombo option:selected');
+	var cities = $('#cityCombo option:selected');
+	var policyTypes = $('#policyTypeCombo option:selected');
+	var selectedAgents = $('#agentsCombo option:selected');
+	var fromDate = $('#startdate').val();
+	var endDate = $('#enddate').val();
+	var groupBy = $('#groupByCombo option:selected');
+	var policyStatus = $('#statusCombo option:selected');
+	var selectedGender = $('#genderCombo option:selected');
+	var salesCount = $('#salesCombo option:selected');
+	var soldCount = $('#soldCombo option:selected');
+	
+	if(countries.size()>0) {
+		filterConditions.push({"country":countries});
+	}
+	if(cities.size()>0) {
+		filterConditions.push({"country":cities});
+	}
+	if(policyTypes.size()>0) {
+		filterConditions.push({"country":policyTypes});
+	}
+	if(selectedAgents.size()>0) {
+		filterConditions.push({"country":selectedAgents});
+	}
+	if(fromDate.length()>0) {
+		filterConditions.push({"policy.start_date":fromDate});
+	}
+	if(endDate.length()>0) {
+		filterConditions.push({"policy.end_date":endDate});
+	}
+	if(groupBy.size()>0) {
+		filterConditions.push({"groupBy":groupBy});
+	}
+	if(policyStatus.size()>0) {
+		filterConditions.push({"policy.status":policyStatus});
+	}
+	if(selectedGender.size()>0) {
+		filterConditions.push({"gender":selectedGender});
+	}
+	if(salesCount.size()>0) {
+		filterConditions.push({"agent.sales":salesCount});
+	}
+	if(soldCount.size()>0) {
+		filterConditions.push({"agent.sold":soldCount});
+	}
+	
+	var results = jQuery.grep(jsonData, function( a ) {
+		  return a.country == "India";
+		});
+	console.log(results);
 }
 
 function changeCity(option, checked) {
