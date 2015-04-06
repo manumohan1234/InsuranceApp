@@ -63,32 +63,17 @@
 							data.addColumn('string', 'Type');
 							data.addColumn('number', 'Count');
 
-							var medApproved = 0;
-							var lifeApproved = 0;
-							var threatApproved= 0;
-							
 							console.log("Aray Length:"+jsonData.length);
-
-							for (var i = 0; i < jsonData.length; i++) {
-
-								switch (jsonData[i].policy.type) {
-								case "Life":
-									medApproved = medApproved + 1;
-									break;
-								case "Medical":
-									lifeApproved = lifeApproved + 1;
-									break;
-								case "Vehicle":
-									threatApproved = threatApproved + 1;
-									break;
-								}
-
-							}
-
-							data
-									.addRow([ "Vehicle", threatApproved]);
-							data.addRow([ "Medical", medApproved ]);
-							data.addRow([ "Life", lifeApproved ]);
+							
+							data.addRow([ "Vehicle", $.grep(jsonData, function (element, index) {
+							    return element.policy.type == "Vehicle";
+							}).length]);
+							data.addRow([ "Medical", $.grep(jsonData, function (element, index) {
+							    return element.policy.type == "Life";
+							}).length]);
+							data.addRow([ "Life", $.grep(jsonData, function (element, index) {
+							    return element.policy.type == "Medical";
+							}).length ]);
 							
 							var pieOptions = {
 									'title' : 'Total Sales By Type',
