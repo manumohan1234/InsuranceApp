@@ -245,6 +245,14 @@ var salesData =  [
                   {"label":">=","value":">="},
                   {"label":"<=","value":"<="}
                  ];
+var ageSlabData =  [
+                  {"label":"10-20","value":"10-20"},
+                  {"label":"21-30","value":"21-30"},
+                  {"label":"31-40","value":"31-40"},
+                  {"label":"41-50","value":"41-50"},
+                  {"label":"51-60","value":"51-60"},
+                  {"label":"61+","value":"61+"}
+                 ];
 $(function() {
 	$('#countryCombo').multiselect(
 			{
@@ -373,13 +381,23 @@ $(function() {
 		butttonHeight :'34px',
 		nonSelectedText : "=",
 		dataprovider:selectorData,
-		nonSelectedText : "=",
-		dataprovider : selectorData,
 		onChange : function(option, checked) {
 		}
 	});
-
 	$('#soldCombo').multiselect('dataprovider', selectorData);
+
+	$('#ageSlabCombo').multiselect({
+		includeSelectAllOption : false,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		butttonHeight :'34px',
+		nonSelectedText : "None",
+		dataprovider : ageSlabData,
+		onChange : function(option, checked) {
+		}
+	});
+	$('#ageSlabCombo').multiselect('dataprovider', ageSlabData);
 	
     $('#datetimepicker6').datetimepicker({
         defaultDate: "01/01/2015"
