@@ -52,7 +52,7 @@
 	function drawChart() {
 		
 		
-		console.log("Data:"+jsondata);
+		console.log("Data:"+jsonData);
 
 
 							var data = new google.visualization.DataTable();
@@ -79,38 +79,38 @@
 							var lifSold = 0;
 							var lifLapsed = 0;
 
-							for (var i = 0; i < jsondata.policies.length; i++) {
-								/* console.log([ jsondata.policies[i].type,
-										jsondata.policies[i].sex, jsondata.policies[i].city,
-										jsondata.policies[i].status, jsondata.policies[i].agent ]); */
+							for (var i = 0; i < jsonData.policies.length; i++) {
+								/* console.log([ jsonData.policies[i].type,
+										jsonData.policies[i].sex, jsonData.policies[i].city,
+										jsonData.policies[i].status, jsonData.policies[i].agent ]); */
 
-								switch (jsondata.policies[i].type) {
+								switch (jsonData.policies[i].type) {
 								case "Vehicle":
-									if (jsondata.policies[i].status == "surrendered")
+									if (jsonData.policies[i].status == "surrendered")
 										vehicleSurr = vehicleSurr + 1;
-									else if (jsondata.policies[i].status == "approved")
+									else if (jsonData.policies[i].status == "approved")
 										vehicleApproved = vehicleApproved + 1;
-									else if (jsondata.policies[i].status == "sold")
+									else if (jsonData.policies[i].status == "sold")
 										vehicleSold = vehicleSold + 1;
 									else
 										vehicleLapsed = vehicleLapsed + 1;
 									break;
 								case "Medical":
-									if (jsondata.policies[i].status == "surrendered")
+									if (jsonData.policies[i].status == "surrendered")
 										medSurr = medSurr + 1;
-									else if (jsondata.policies[i].status == "approved")
+									else if (jsonData.policies[i].status == "approved")
 										medApproved = medApproved + 1;
-									else if (jsondata.policies[i].status == "sold")
+									else if (jsonData.policies[i].status == "sold")
 										medSold = medSold + 1;
 									else
 										medLapsed = medLapsed + 1;
 									break;
 								case "Life":
-									if (jsondata.policies[i].status == "surrendered")
+									if (jsonData.policies[i].status == "surrendered")
 										lifSurr = lifSurr + 1;
-									else if (jsondata.policies[i].status == "approved")
+									else if (jsonData.policies[i].status == "approved")
 										lifApproved = lifApproved + 1;
-									else if (jsondata.policies[i].status == "sold")
+									else if (jsonData.policies[i].status == "sold")
 										lifSold = lifSold + 1;
 									else
 										lifLapsed = lifLapsed + 1;
@@ -335,7 +335,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-2" style="">
-				<button type="button" class="btn btn-primary" onclick="doGetFromResponse();">Generate
+				<button type="button" class="btn btn-primary" onclick="generateReport();">Generate
 					report</button>
 			</div>
 			<div class="col-sm-2" style="">

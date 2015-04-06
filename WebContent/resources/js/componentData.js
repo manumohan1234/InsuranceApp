@@ -449,7 +449,7 @@ function generateReport () {
 		filterConditions.push({"country":countries});
 	}
 	if(cities.size()>0) {
-		filterConditions.push({"country":cities});
+		filterConditions.push({"city":cities});
 	}
 	if(policyTypes.size()>0) {
 		filterConditions.push({"country":policyTypes});
@@ -457,10 +457,10 @@ function generateReport () {
 	if(selectedAgents.size()>0) {
 		filterConditions.push({"country":selectedAgents});
 	}
-	if(fromDate.length()>0) {
+	if(fromDate.length>0) {
 		filterConditions.push({"policy.start_date":fromDate});
 	}
-	if(endDate.length()>0) {
+	if(endDate.length>0) {
 		filterConditions.push({"policy.end_date":endDate});
 	}
 	if(groupBy.size()>0) {
@@ -480,7 +480,7 @@ function generateReport () {
 	}
 	
 	var results = jQuery.grep(jsonData, function( a ) {
-		  return a.country == "India";
+		  return a.country == "USA";
 		});
 	console.log(results);
 }
