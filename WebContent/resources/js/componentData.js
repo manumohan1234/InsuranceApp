@@ -33,7 +33,8 @@ var statusData = [{"label":"Approved","value":"Approved"},
                   {"label":"Cancelled","value":"Cancelled"},
                   {"label":"Pending","value":"Pending"}];
 
-var selectorData = [ {"label":">","value":">"},
+var selectorData = [ {"label":"=","value":"="},
+                     {"label":">","value":">"},
                      {"label":"<","value":"<"},
                      {"label":">=","value":">="},
                      {"label":"<=","value":"<="}];
@@ -237,6 +238,7 @@ var cityData = [
                 }
             ];
 var salesData =  [
+                  {"label":"=","value":"="},
                   {"label":">","value":">"},
                   {"label":"<","value":"<"},
                   {"label":">=","value":">="},
@@ -370,7 +372,7 @@ $(function() {
 		buttonClass : 'btn btn-default col-sm-12 btn-sm',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
-		butttonHeight : '34px',
+		butttonHeight :'34px',
 		nonSelectedText : "All",
 		dataprovider:selectorData,
 		onChange : function(option, checked) {
