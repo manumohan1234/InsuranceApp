@@ -403,34 +403,6 @@ $(function() {
 	$("#salesFilterDiv").hide();
 	$("#soldFilterDiv").hide();
 });
-
-var barData = "";
-// Load the Visualization API and the piechart package.
-google.load('visualization', '1.0', {
-	'packages' : [ 'corechart' ]
-});
-google.load("visualization", "1.1", {
-	packages : [ "bar" ]
-});
-google.load("visualization", "1.1", {
-	packages : [ "timeline" ]
-});
-
-// Set a callback to run when the Google Visualization API is loaded.
-google.setOnLoadCallback(drawChart);
-
-
-function drawChart() {
-
-//	var pieChart = new google.visualization.PieChart(
-//			document.getElementById('pie-chart_div'));
-//	pieChart.draw(jsondata, pieOptions);
-//
-//	var barChart = new google.visualization.BarChart(
-//			document.getElementById('bar-chart_div'));
-//	barChart.draw(jsondata, barOptions);
-}
-
 function generateReport () {
 	var filterConditions = [];
 	var countries = $('#countryCombo option:selected');

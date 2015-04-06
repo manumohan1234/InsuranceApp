@@ -11,14 +11,17 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap-multiselect.css">
 
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+<!-- Resources -->
 <script src="resources/js/policy.js"></script>
 <script src="resources/js/bootstrap-multiselect.js"></script>
-<script src="resources/data/policies.js"></script>
+<script src="resources/js/componentData.js"></script>
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
@@ -58,75 +61,34 @@
 							var data = new google.visualization.DataTable();
 
 							data.addColumn('string', 'Type');
-							data.addColumn('number', 'Surrendered');
-							data.addColumn('number', 'Lapsed');
-							data.addColumn('number', 'Approved');
-							data.addColumn('number', 'Sold');
+							data.addColumn('number', 'Count');
 
-
-							var vehicleSurr = 0;
-							var vehicleApproved = 0;
-							var vehicleSold = 0;
-							var vehicleLapsed = 0;
-
-							var medSurr = 0;
 							var medApproved = 0;
-							var medSold = 0;
-							var medLapsed = 0;
+							var lifeApproved = 0;
+							var threatApproved= 0;
+							
+							console.log("Aray Length:"+jsonData.length);
 
-							var lifSurr = 0;
-							var lifApproved = 0;
-							var lifSold = 0;
-							var lifLapsed = 0;
+							for (var i = 0; i < jsonData.length; i++) {
 
-							for (var i = 0; i < jsonData.policies.length; i++) {
-								/* console.log([ jsonData.policies[i].type,
-										jsonData.policies[i].sex, jsonData.policies[i].city,
-										jsonData.policies[i].status, jsonData.policies[i].agent ]); */
-
-								switch (jsonData.policies[i].type) {
-								case "Vehicle":
-									if (jsonData.policies[i].status == "surrendered")
-										vehicleSurr = vehicleSurr + 1;
-									else if (jsonData.policies[i].status == "approved")
-										vehicleApproved = vehicleApproved + 1;
-									else if (jsonData.policies[i].status == "sold")
-										vehicleSold = vehicleSold + 1;
-									else
-										vehicleLapsed = vehicleLapsed + 1;
+								switch (jsonData[i].policy.type) {
+								case "Life":
+									medApproved = medApproved + 1;
 									break;
 								case "Medical":
-									if (jsonData.policies[i].status == "surrendered")
-										medSurr = medSurr + 1;
-									else if (jsonData.policies[i].status == "approved")
-										medApproved = medApproved + 1;
-									else if (jsonData.policies[i].status == "sold")
-										medSold = medSold + 1;
-									else
-										medLapsed = medLapsed + 1;
+									lifeApproved = lifeApproved + 1;
 									break;
-								case "Life":
-									if (jsonData.policies[i].status == "surrendered")
-										lifSurr = lifSurr + 1;
-									else if (jsonData.policies[i].status == "approved")
-										lifApproved = lifApproved + 1;
-									else if (jsonData.policies[i].status == "sold")
-										lifSold = lifSold + 1;
-									else
-										lifLapsed = lifLapsed + 1;
+								case "Vehicle":
+									threatApproved = threatApproved + 1;
 									break;
 								}
 
 							}
 
 							data
-									.addRow([ "Vehicle", vehicleSurr,
-											vehicleLapsed, vehicleApproved,
-											vehicleSold ]);
-							data.addRow([ "Medical", medSurr, medLapsed,
-									medApproved, medSold ]);
-							data.addRow([ "Life", lifSurr, lifLapsed,
-									lifApproved, lifSold ]);
+									.addRow([ "Vehicle", threatApproved]);
+							data.addRow([ "Medical", medApproved ]);
+							data.addRow([ "Life", lifeApproved ]);
 							
 							var pieOptions = {
 									'title' : 'Total Sales By Type',
@@ -356,5 +318,5 @@
 		<div id="bar-chart_div" style="float: left; padding-left:4%;"></div>
 	</div>
 </body>
-<script src="resources/js/componentData.js"></script>
+
 </html>
