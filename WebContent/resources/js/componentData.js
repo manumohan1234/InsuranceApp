@@ -6,7 +6,8 @@ var countryData = [{"label":"India", "value":"India"},
                    {"label":"Italy", "value":"Italy"},
                    {"label":"France", "value":"France"}];
 
-var groupByData = [{"label":"Country", "value":"country"},
+var groupByData = [{"label":"None", "value":"None"},
+                   {"label":"Country", "value":"country"},
                    {"label":"City", "value":"city"},
                    {"label":"Policy Type", "value":"policyType"},
                    {"label":"Agents", "value":"Agents"}];
@@ -18,16 +19,16 @@ var policyData =  [{"label":"Medical","value":"Medical"},
                    {"label":"Theft","value":"Theft"},
                    {"label":"Life","value":"Life"}];
 
-var agentData = [{"label":"Agent 1", "value":"Agent 1"},
-                 {"label":"Agent 2", "value":"Agent 2"},
-                 {"label":"Agent 3", "value":"Agent 3"},
-                 {"label":"Agent 4", "value":"Agent 4"},
-                 {"label":"Agent 5", "value":"Agent 5"},
-                 {"label":"Agent 6", "value":"Agent 6"},
-                 {"label":"Agent 7", "value":"Agent 7"},
-                 {"label":"Agent 8", "value":"Agent 8"},
-                 {"label":"Agent 9", "value":"Agent 9"},
-                 {"label":"Agent 10", "value":"Agent 10"},];
+var agentData = [{"label":"Agent 1", "value":"Agent1"},
+                 {"label":"Agent 2", "value":"Agent2"},
+                 {"label":"Agent 3", "value":"Agent3"},
+                 {"label":"Agent 4", "value":"Agent4"},
+                 {"label":"Agent 5", "value":"Agent5"},
+                 {"label":"Agent 6", "value":"Agent6"},
+                 {"label":"Agent 7", "value":"Agent7"},
+                 {"label":"Agent 8", "value":"Agent8"},
+                 {"label":"Agent 9", "value":"Agent9"},
+                 {"label":"Agent 10", "value":"Agent10"},];
 
 var statusData = [{"label":"Approved","value":"Approved"},
                   {"label":"Cancelled","value":"Cancelled"},
@@ -471,8 +472,10 @@ function generateReport () {
 			"value":endDate});
 	}
 	if(groupBy.length>0) {
-		filterConditions.push({"name":"groupBy",
-			"value":groupBy});
+		if(groupBy[0] != "None") {
+			filterConditions.push({"name":"groupBy",
+				"value":groupBy});
+		}
 	}
 	if(policyStatus.length>0) {
 		filterConditions.push({"name":"policy.status",
@@ -494,8 +497,8 @@ function generateReport () {
 	var results = jsonData;
 	$.each(filterConditions, function(i, filter){
 		results = jQuery.grep(results, function( object ) {
-			if($.isArray(filter.value) != -1) {
-				if($.inArray(object[filter.name],filter.value)) {
+			if($.isArray(filter.value)) {
+				if($.inArray(object[filter.name],filter.value) != -1) {
 					return object;
 				}
 			} else {
@@ -509,7 +512,7 @@ function generateReport () {
 function getSelectedComboValues(options) {
 	var selected = [];
     $(options).each(function(index, option){
-        selected.push([$(this).val()]);
+        selected.push([$(this).val()][0]);
     });
     return selected;
 }
