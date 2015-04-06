@@ -1,274 +1,250 @@
 /**
  * 
  */
-var countryData = [ {
-	"label" : "India",
-	"value" : "India"
-}, {
-	"label" : "USA",
-	"value" : "USA"
-}, {
-	"label" : "Italy",
-	"value" : "Italy"
-}, {
-	"label" : "France",
-	"value" : "France"
-} ];
+var countryData = [{"label":"India", "value":"India"},
+                   {"label":"USA", "value":"USA"},
+                   {"label":"Italy", "value":"Italy"},
+                   {"label":"France", "value":"France"}];
 
-var groupByData = [ {
-	"label" : "None",
-	"value" : "None"
-}, {
-	"label" : "Country",
-	"value" : "country"
-}, {
-	"label" : "City",
-	"value" : "city"
-}, {
-	"label" : "Policy Type",
-	"value" : "policyType"
-}, {
-	"label" : "Agents",
-	"value" : "Agents"
-} ];
+var groupByData = [{"label":"None", "value":"None"},
+                   {"label":"Country", "value":"country"},
+                   {"label":"City", "value":"city"},
+                   {"label":"Policy Type", "value":"policyType"},
+                   {"label":"Agents", "value":"Agents"}];
 
-var genderData = [ {
-	"label" : "Male",
-	"value" : "male"
-}, {
-	"label" : "Female",
-	"value" : "female"
-} ];
+var genderData = [{"label":"Male", "value":"male"},
+                   {"label":"Female", "value":"female"}];
 
-var policyData = [ {
-	"label" : "Medical",
-	"value" : "Medical"
-}, {
-	"label" : "Theft",
-	"value" : "Theft"
-}, {
-	"label" : "Life",
-	"value" : "Life"
-} ];
+var policyData =  [{"label":"Medical","value":"Medical"},
+                   {"label":"Theft","value":"Theft"},
+                   {"label":"Life","value":"Life"}];
 
-var agentData = [ {
-	"label" : "Agent 1",
-	"value" : "Agent1"
-}, {
-	"label" : "Agent 2",
-	"value" : "Agent2"
-}, {
-	"label" : "Agent 3",
-	"value" : "Agent3"
-}, {
-	"label" : "Agent 4",
-	"value" : "Agent4"
-}, {
-	"label" : "Agent 5",
-	"value" : "Agent5"
-}, {
-	"label" : "Agent 6",
-	"value" : "Agent6"
-}, {
-	"label" : "Agent 7",
-	"value" : "Agent7"
-}, {
-	"label" : "Agent 8",
-	"value" : "Agent8"
-}, {
-	"label" : "Agent 9",
-	"value" : "Agent9"
-}, {
-	"label" : "Agent 10",
-	"value" : "Agent10"
-}, ];
+var agentData = [{"label":"Agent 1", "value":"Agent1"},
+                 {"label":"Agent 2", "value":"Agent2"},
+                 {"label":"Agent 3", "value":"Agent3"},
+                 {"label":"Agent 4", "value":"Agent4"},
+                 {"label":"Agent 5", "value":"Agent5"},
+                 {"label":"Agent 6", "value":"Agent6"},
+                 {"label":"Agent 7", "value":"Agent7"},
+                 {"label":"Agent 8", "value":"Agent8"},
+                 {"label":"Agent 9", "value":"Agent9"},
+                 {"label":"Agent 10", "value":"Agent10"},];
 
-var statusData = [ {
-	"label" : "Approved",
-	"value" : "Approved"
-}, {
-	"label" : "Cancelled",
-	"value" : "Cancelled"
-}, {
-	"label" : "Pending",
-	"value" : "Pending"
-} ];
+var statusData = [{"label":"Approved","value":"Approved"},
+                  {"label":"Cancelled","value":"Cancelled"},
+                  {"label":"Pending","value":"Pending"}];
 
-var selectorData = [ {
-	"label" : ">",
-	"value" : ">"
-}, {
-	"label" : "<",
-	"value" : "<"
-}, {
-	"label" : ">=",
-	"value" : ">="
-}, {
-	"label" : "<=",
-	"value" : "<="
-} ];
+var selectorData = [ {"label":"=","value":"="},
+                     {"label":">","value":">"},
+                     {"label":"<","value":"<"},
+                     {"label":">=","value":">="},
+                     {"label":"<=","value":"<="}];
 
-var cityTempData = [ {
-	"label" : "Trivandrum",
-	"value" : "Trivandrum"
-}, {
-	"label" : "Banglore",
-	"value" : "Banglore"
-}, {
-	"label" : "Mumbai",
-	"value" : "Mumbai"
-}, {
-	"label" : "Hyderabad",
-	"value" : "Hyderabad"
-}, {
-	"label" : "Pune",
-	"value" : "Pune"
-}, {
-	"label" : "New York",
-	"value" : "New York"
-}, {
-	"label" : "Los Angeles",
-	"value" : "Los Angeles"
-}, {
-	"label" : "Chicago",
-	"value" : "Chicago"
-}, {
-	"label" : "Houston",
-	"value" : "Houston"
-}, {
-	"label" : "San Francisco",
-	"value" : "San Francisco"
-}, {
-	"label" : "Rome",
-	"value" : "Rome"
-}, {
-	"label" : "Venice",
-	"value" : "Venice"
-}, {
-	"label" : "Milan",
-	"value" : "Milan"
-}, {
-	"label" : "Naples",
-	"value" : "Naples"
-}, {
-	"label" : "Florence",
-	"value" : "Florence"
-}, {
-	"label" : "Paris",
-	"value" : "Paris"
-}, {
-	"label" : "Marseille",
-	"value" : "Marseille"
-}, {
-	"label" : "Lyon",
-	"value" : "Lyon"
-}, {
-	"label" : "Toulouse",
-	"value" : "Toulouse"
-}, {
-	"label" : "Strasbourg",
-	"value" : "Strasbourg"
-} ];
 
-var cityData = [ {
-	"country" : {
-		"label" : "India",
-		"value" : "India",
-		"cities" : [ {
-			"label" : "Trivandrum",
-			"value" : "Trivandrum"
-		}, {
-			"label" : "Banglore",
-			"value" : "Banglore"
-		}, {
-			"label" : "Mumbai",
-			"value" : "Mumbai"
-		}, {
-			"label" : "Hyderabad",
-			"value" : "Hyderabad"
-		}, {
-			"label" : "Pune",
-			"value" : "Pune"
-		} ]
-	}
-}, {
-	"country" : {
-		"label" : "USA",
-		"value" : "USA",
-		"cities" : [ {
-			"label" : "New York",
-			"value" : "New York"
-		}, {
-			"label" : "Los Angeles",
-			"value" : "Los Angeles"
-		}, {
-			"label" : "Chicago",
-			"value" : "Chicago"
-		}, {
-			"label" : "Houston",
-			"value" : "Houston"
-		}, {
-			"label" : "San Francisco",
-			"value" : "San Francisco"
-		} ]
-	}
-}, {
-	"country" : {
-		"label" : "Italy",
-		"value" : "Italy",
-		"cities" : [ {
-			"label" : "Rome",
-			"value" : "Rome"
-		}, {
-			"label" : "Venice",
-			"value" : "Venice"
-		}, {
-			"label" : "Milan",
-			"value" : "Milan"
-		}, {
-			"label" : "Naples",
-			"value" : "Naples"
-		}, {
-			"label" : "Florence",
-			"value" : "Florence"
-		} ]
-	}
-}, {
-	"country" : {
-		"label" : "France",
-		"value" : "France",
-		"cities" : [ {
-			"label" : "Paris",
-			"value" : "Paris"
-		}, {
-			"label" : "Marseille",
-			"value" : "Marseille"
-		}, {
-			"label" : "Lyon",
-			"value" : "Lyon"
-		}, {
-			"label" : "Toulouse",
-			"value" : "Toulouse"
-		}, {
-			"label" : "Strasbourg",
-			"value" : "Strasbourg"
-		} ]
-	}
-} ];
-var salesData = [ {
-	"label" : ">",
-	"value" : ">"
-}, {
-	"label" : "<",
-	"value" : "<"
-}, {
-	"label" : ">=",
-	"value" : ">="
-}, {
-	"label" : "<=",
-	"value" : "<="
-} ];
+var cityTempData = [
+                    {
+                        "label": "Trivandrum",
+                        "value": "Trivandrum"
+                    },
+                    {
+                        "label": "Banglore",
+                        "value": "Banglore"
+                    },
+                    {
+                        "label": "Mumbai",
+                        "value": "Mumbai"
+                    },
+                    {
+                        "label": "Hyderabad",
+                        "value": "Hyderabad"
+                    },
+                    {
+                        "label": "Pune",
+                        "value": "Pune"
+                    },
+                    {
+                        "label": "New York",
+                        "value": "New York"
+                    },
+                    {
+                        "label": "Los Angeles",
+                        "value": "Los Angeles"
+                    },
+                    {
+                        "label": "Chicago",
+                        "value": "Chicago"
+                    },
+                    {
+                        "label": "Houston",
+                        "value": "Houston"
+                    },
+                    {
+                        "label": "San Francisco",
+                        "value": "San Francisco"
+                    },
+                    {
+                        "label": "Rome",
+                        "value": "Rome"
+                    },
+                    {
+                        "label": "Venice",
+                        "value": "Venice"
+                    },
+                    {
+                        "label": "Milan",
+                        "value": "Milan"
+                    },
+                    {
+                        "label": "Naples",
+                        "value": "Naples"
+                    },
+                    {
+                        "label": "Florence",
+                        "value": "Florence"
+                    },
+                    {
+                        "label": "Paris",
+                        "value": "Paris"
+                    },
+                    {
+                        "label": "Marseille",
+                        "value": "Marseille"
+                    },
+                    {
+                        "label": "Lyon",
+                        "value": "Lyon"
+                    },
+                    {
+                        "label": "Toulouse",
+                        "value": "Toulouse"
+                    },
+                    {
+                        "label": "Strasbourg",
+                        "value": "Strasbourg"
+                    }
+                ];
 
+var cityData = [
+                {
+                    "country": {
+                        "label": "India",
+                        "value": "India",
+                        "cities": [
+                            {
+                                "label": "Trivandrum",
+                                "value": "Trivandrum"
+                            },
+                            {
+                                "label": "Banglore",
+                                "value": "Banglore"
+                            },
+                            {
+                                "label": "Mumbai",
+                                "value": "Mumbai"
+                            },
+                            {
+                                "label": "Hyderabad",
+                                "value": "Hyderabad"
+                            },
+                            {
+                                "label": "Pune",
+                                "value": "Pune"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "country": {
+                        "label": "USA",
+                        "value": "USA",
+                        "cities": [
+                            {
+                                "label": "New York",
+                                "value": "New York"
+                            },
+                            {
+                                "label": "Los Angeles",
+                                "value": "Los Angeles"
+                            },
+                            {
+                                "label": "Chicago",
+                                "value": "Chicago"
+                            },
+                            {
+                                "label": "Houston",
+                                "value": "Houston"
+                            },
+                            {
+                                "label": "San Francisco",
+                                "value": "San Francisco"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "country": {
+                        "label": "Italy",
+                        "value": "Italy",
+                        "cities": [
+                            {
+                                "label": "Rome",
+                                "value": "Rome"
+                            },
+                            {
+                                "label": "Venice",
+                                "value": "Venice"
+                            },
+                            {
+                                "label": "Milan",
+                                "value": "Milan"
+                            },
+                            {
+                                "label": "Naples",
+                                "value": "Naples"
+                            },
+                            {
+                                "label": "Florence",
+                                "value": "Florence"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "country": {
+                        "label": "France",
+                        "value": "France",
+                        "cities": [
+                            {
+                                "label": "Paris",
+                                "value": "Paris"
+                            },
+                            {
+                                "label": "Marseille",
+                                "value": "Marseille"
+                            },
+                            {
+                                "label": "Lyon",
+                                "value": "Lyon"
+                            },
+                            {
+                                "label": "Toulouse",
+                                "value": "Toulouse"
+                            },
+                            {
+                                "label": "Strasbourg",
+                                "value": "Strasbourg"
+                            }
+                        ]
+                    }
+                }
+            ];
+var salesData =  [
+                  {"label":"=","value":"="},
+                  {"label":">","value":">"},
+                  {"label":"<","value":"<"},
+                  {"label":">=","value":">="},
+                  {"label":"<=","value":"<="}
+                 ];
 $(function() {
 	$('#countryCombo').multiselect(
 			{
@@ -391,10 +367,10 @@ $(function() {
 
 	$('#soldCombo').multiselect({
 		includeSelectAllOption : false,
-		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		buttonClass : 'btn btn-default col-sm-12 btn-sm btn-height',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
-		butttonHeight : '34px',
+		butttonHeight :'34px',
 		nonSelectedText : "All",
 		dataprovider : selectorData,
 		onChange : function(option, checked) {
@@ -414,7 +390,7 @@ $(function() {
 
 	$('#salesCombo').multiselect({
 		includeSelectAllOption : true,
-		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		buttonClass : 'btn btn-default col-sm-12 btn-sm btn-height',
 		numberDisplayed : 1,
 		buttonWidth : '100%',
 		nonSelectedText : "All",
