@@ -33,6 +33,11 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<!-- High Charts API  -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-3d.js"></script>
+
 <script>
 	google.load('visualization', '1.0', {
 		'packages' : [ 'corechart' ]
@@ -52,7 +57,7 @@
 	//google.setOnLoadCallback(doGetFromResponse);
 
 	
-	function drawChart() {
+	/* function drawChart() {
 		
 		
 		console.log("Data:"+jsonData);
@@ -87,7 +92,7 @@
 							var pieChart = new google.visualization.PieChart(
 									document.getElementById('pie-chart_div'));
 							pieChart.draw(data, pieOptions);
-}
+} */
 	
 	function doGetFromResponse() {
 		
@@ -164,6 +169,62 @@
 	
 </script>
 
+<script type="text/javascript">
+			$(function () { 
+				var processed_json = new Array();
+				var life_count,med_count,veh_count;
+				$.map(jsonData, function(obj, i) {
+					life_count =  $.grep(jsonData, function (element, index) { 
+						return element.policy.type == "Life";}).length;
+					med_count =  $.grep(jsonData, function (element, index) { 
+						return element.policy.type == "Medical";}).length;
+					veh_count =  $.grep(jsonData, function (element, index) { 
+						return element.policy.type == "Vehicle";}).length;
+				});
+				processed_json.push(["Vehicle", veh_count]);
+				processed_json.push(["Life", life_count]);
+				processed_json.push(["Medical", med_count]);
+
+				$('#pie_chart_div').highcharts({
+	        		chart: {
+            			type: 'pie',
+            			options3d: {
+							enabled: true,
+                			alpha: 60,
+                			beta: 0,
+            			}
+        			},
+        			title: {
+        				text: 'Total Sales by Type'
+        			},
+        			tooltip: {
+        				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        			},
+	       			plotOptions: {
+		   	        	pie: {
+    	            		depth: 30,
+    	            		allowPointSelect: true,
+                			cursor: 'pointer',
+                			dataLabels: {
+                    			enabled: true,
+                    			format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    			style: {
+                        			color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    			}
+                			}
+            			}
+        			},
+	        
+		     	   	series: [{
+		     	   		type: 'pie',
+            			name: 'Policy Type',
+    	     			data: processed_json
+        			}]
+    			});
+  			});
+		</script>
+		
+		
 </head>
 <body>
 	<div class="">
