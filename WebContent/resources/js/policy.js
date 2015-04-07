@@ -7,13 +7,13 @@ var jsonData = [
             "address": "Akaka Po ",
             "city": "Trivandrum",
             "country": "India",
-            "policy": {
+            "policy"	: {
                 "type": "Life",
                 "start_date": "29-March-2015",
                 "end_date": "30-January-2020",
                 "status": "approved"
             },
-          "agent": {
+            "agent": {
                 "name": "Agent1",
                 "sales": 150,
                 "sold": 100
@@ -169,7 +169,7 @@ var jsonData = [
             "country": "India",
             "policy": {
                 "type": "Vehicle",
-                "start_date": "29-March-2015",
+                "start_date": "29-March	-2015",
                 "end_date": "30-January-2020",
                 "status": "surrendered"
             },
