@@ -23,3 +23,10 @@ body {
 .btn-height {
 	height: 34px;
 }
+.row{
+	margin-left:0px;
+	padding-top:10px;
+}
+.leftPane{
+	padding:5px;
+}

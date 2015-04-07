@@ -49,7 +49,7 @@
 	
 	// Set a callback to run when the Google Visualization API is loaded.
 	google.setOnLoadCallback(drawChart);
-	google.setOnLoadCallback(doGetFromResponse);
+	//google.setOnLoadCallback(doGetFromResponse);
 
 	
 	function drawChart() {
@@ -160,8 +160,7 @@
 	    chart.draw(data, barOptions);
 		
 	}
-							
-	
+	  
 	
 </script>
 
@@ -256,14 +255,14 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-sm-2">
+		<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon span-padding">Age :</span>
-      				<input type="number" class="form-control" aria-label="...">
-      				<span class="input-group-addon span-padding">To</span>
-      				<input type="number" class="form-control" aria-label="...">
-    			</div><!-- /input-group -->
-			</div> 
+					<span class="input-group-addon" id="ageFilter">Select age limit</span> 
+						<select multiple="multiple" data-hover="dropdown"
+						data-toggle="dropdown" class="age" id="ageSlabCombo">
+					</select>
+				</div>
+			</div>
 			<div class="col-sm-2" id="salesFilterDiv">
 				<div class="input-group">
 					<span class="input-group-addon" id="salesFilter">Sales</span>
@@ -301,14 +300,33 @@
 			<div class="col-sm-2" style="">
 				<button type="button" class="btn btn-info">Export to PDF</button>
 			</div>
+			<div class="col-sm-2" style="">
+				<button type="button" class="btn btn-info">Save Query</button>
+			</div>
+			<div class="col-sm-2" style="">
+				<button type="button" class="btn btn-info">Reset Filters</button>
+			</div>
 		</div>
 	</div>
 
-
-	<div id="chartContainerDiv" class="row">
+<div class="row">
+	<div id="leftPane" class="col-md-3">
+		<ul class="nav nav-pills nav-stacked">
+ 		 	<li role="presentation" class="list-group-item">Sales report by type</li>
+ 			<li role="presentation"  class="list-group-item">Sales report by country</li>
+ 			<li class="divider"></li>
+ 			<li role="presentation" class="list-group-item">Sales report by month</li>
+ 			<li role="presentation" class="list-group-item">Sales report by year</li>
+ 			<li role="presentation" class="divider"></li>
+   			<li role="presentation" class="list-group-item">Sales report by agent</li>
+  			<li role="presentation"  class="list-group-item">Sales report by age group</li>
+		</ul>
+	</div>
+	<div id="chartContainerDiv" class="col-md-9">
 		<div id="pie-chart_div" style="float: left;"></div>
 		<div id="bar-chart_div" style="float: left; padding-left:4%;"></div>
 	</div>
+</div>
 </body>
 
 </html>
