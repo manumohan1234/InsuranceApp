@@ -69,10 +69,10 @@
 							    return element.policy.type == "Vehicle";
 							}).length]);
 							data.addRow([ "Medical", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Life";
+							    return element.policy.type == "Medical";
 							}).length]);
 							data.addRow([ "Life", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Medical";
+							    return element.policy.type == "Life";
 							}).length ]);
 							
 							var pieOptions = {
