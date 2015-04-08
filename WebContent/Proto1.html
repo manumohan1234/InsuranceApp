@@ -173,8 +173,8 @@
 <script type="text/javascript">
 	$(function () { 
 		$('li a').click(function (e) {
-		    e.preventDefault();
-		    $("#bar-chart_div").load(this.href);
+// 		    e.preventDefault();
+// 		    $("#bar-chart_div").load(this.href);
 		});
 		
 		var lap = new Array();
@@ -256,7 +256,7 @@
 
 		$('#bar-chart_div').highcharts({
 			title: {
-				text: 'Monthly Policy Status'
+				text: 'Policy Status'
 			},
 			xAxis: {
 				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -431,9 +431,9 @@
 			<div class="col-sm-2" style="">
 				<button type="button" class="btn btn-info">Save Query</button>
 			</div>
-			<div class="col-sm-2" style="">
-				<button type="button" class="btn btn-info">Reset Filters</button>
-			</div>
+<!-- 			<div class="col-sm-2" style=""> -->
+<!-- 				<button type="button" class="btn btn-info">Reset Filters</button> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 
