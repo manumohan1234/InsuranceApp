@@ -438,6 +438,12 @@ $(function() {
 	$("#soldFilterDiv").hide();
 });
 
+$document.ready(function(){
+	$("#home").click(function(){
+		$("#bar-chart_div").load("Home.html");
+	});
+});
+
 var filterConditions = [];
 function generateReport() {
 	filterConditions = [];

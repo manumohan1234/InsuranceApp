@@ -171,11 +171,13 @@
 </script> -->
 
 <script type="text/javascript">
+
+	/* function loadView(url) {
+		$("#bar-chart_div").load(url);
+	} */
 	$(function () { 
-		$('li a').click(function (e) {
-		    e.preventDefault();
-		    $("#bar-chart_div").load(this.href);
-		});
+		
+		
 		
 		var lap = new Array();
 		var app = new Array();
@@ -440,7 +442,8 @@
 <div class="row">
 	<div id="leftPane" class="col-md-3">
 		<ul class="nav nav-pills nav-stacked">
- 		 	<li role="presentation" class="list-group-item"><a href="highcharts.html" class="salesByType">Sales report by type</a></li>
+			<li id="home" role="presentation" class="list-group-item">Home</li>
+ 		 	<li role="presentation" class="list-group-item"><a href="SalesByType.html" id="salesbyType">Sales report by type</a></li>
  			<li role="presentation"  class="list-group-item">Sales report by country</li>
  			<li class="divider"></li>
  			<li role="presentation" class="list-group-item">Sales report by month</li>
@@ -451,8 +454,7 @@
 		</ul>
 	</div>
 	<div id="chartContainerDiv" class="col-md-9">
-		<!-- <div id="pie-chart_div" style="float: left;"></div> -->
-		<div id="bar-chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</div>
 </div>
 </body>
