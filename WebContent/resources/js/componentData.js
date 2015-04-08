@@ -1,16 +1,8 @@
 $(document).ready(function(){
 	$("#salesByType").click(function(){
-		$("#chart_div").empty();
-		/*$("#chartContainerDiv").append(
-				'<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>'
-		);*/
 		$("#chart_div").load("SalesByType.html");
 	});
 	$("#home").click(function(){
-		$("#chart_div").empty();
-		/*$("#chartContainerDiv").append(
-				'<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>'
-		);*/
 		$("#chart_div").load("Home.html");
 	});
 });
@@ -559,69 +551,3 @@ function changeCity(option, checked) {
 	console.info(checked);
 }
 
-
-
-/* Draw the Chart from the search results */
-function drawChartFromResults(results) {
-
-	console.log("process");
-
-	var data = new google.visualization.DataTable();
-
-	data.addColumn('string', 'Month');
-	data.addColumn('number', 'Surrendered');
-	data.addColumn('number', 'Lapsed');
-	data.addColumn('number', 'Approved');
-
-	console.log("Results Obj Length:" + results.length);
-
-	for ( var i = 0; i < results.length; i++) {
-
-		var month;
-
-		if (month != results[i].policy.start_date) {
-
-			console.log("Date mismatched");
-			month = results[i].policy.start_date;
-		}
-
-
-		var sur = 0;
-		var lap = 0;
-		var appr = 0;
-		
-		for ( var k = 0; k < results.length; k++) {
-
-			if (results[i].policy.start_date == month) {
-
-				switch (results[k].policy.status) {
-
-				case "surrendered":
-					sur = sur + 1;
-					break;
-				case "approved":
-					appr = appr + 1;
-					break;
-				case "lapsed":
-					lap = lap + 1;
-					break;
-				}
-			}
-		}
-		data.addRow([ month, sur, lap, appr ]);
-
-		
-
-	}
-
-	var chart = new google.charts.Bar(document.getElementById('bar-chart_div'));
-	// Set chart options
-	var barOptions = {
-		'title' : 'Sales in a Look',
-		'width' : 700,
-		'height' : 400
-	};
-
-	chart.draw(data, barOptions);
-
-}
