@@ -1,7 +1,7 @@
 <script type="text/javascript">
-			$(function () { 
-				var processed_json = new Array();
-				var life_count,med_count,veh_count;
+$(function () { 
+			var processed_json = new Array();
+			var life_count,med_count,veh_count;
 				$.map(jsonData, function(obj, i) {
 					life_count =  $.grep(jsonData, function (element, index) { 
 						return element.policy.type == "Life";}).length;
@@ -14,7 +14,7 @@
 				processed_json.push(["Life", life_count]);
 				processed_json.push(["Medical", med_count]);
 
-				$('#container').highcharts({
+				$('#pieChart').highcharts({
 	        		chart: {
             			type: 'pie',
             			options3d: {
@@ -52,4 +52,4 @@
     			});
   			});
 		</script>
-<div id="container" style="width:100%; height:400px;"></div>
+<div id="pieChart" style="width:100%; height:400px;"></div>
