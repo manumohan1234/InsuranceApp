@@ -37,8 +37,66 @@
 
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/highcharts-3d.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-<script>
+<!-- <script>
+=======
+<!-- <script>
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	google.load("visualization", "1.1", {
+		packages : [ "bar" ]
+	});
+	google.load("visualization", "1.1", {
+		packages : [ "timeline" ]
+	});
+	
+	//Load the Visualization API and the ready-made Google table visualization
+	google.load('visualization', '1', {'packages':['table']});
+	
+	//Set a callback to run when the Google Visualization API is loaded.
+    //google.setOnLoadCallback(drawChart);
+	//google.setOnLoadCallback(doGetFromResponse);
+
+	
+	/* function drawChart() {
+		
+		
+		console.log("Data:"+jsonData);
+
+
+							var data = new google.visualization.DataTable();
+
+							data.addColumn('string', 'Type');
+							data.addColumn('number', 'Count');
+
+							console.log("Aray Length:"+jsonData.length);
+							
+							data.addRow([ "Vehicle", $.grep(jsonData, function (element, index) {
+							    return element.policy.type == "Vehicle";
+							}).length]);
+							data.addRow([ "Medical", $.grep(jsonData, function (element, index) {
+							    return element.policy.type == "Medical";
+							}).length]);
+							data.addRow([ "Life", $.grep(jsonData, function (element, index) {
+							    return element.policy.type == "Life";
+							}).length ]);
+							
+							var pieOptions = {
+									'title' : 'Total Sales By Type',
+									'width' : 500,
+									'height' : 400,
+									is3D : true
+								};
+							
+							// Instantiate and draw our chart, passing in some options.
+
+							var pieChart = new google.visualization.PieChart(
+									document.getElementById('pie-chart_div'));
+							pieChart.draw(data, pieOptions);
+} */
+
 	function doGetFromResponse() {
 		
 		//console.log("STart Date:"+('#startdate').data('date'));
@@ -112,64 +170,131 @@
 	}
 	  
 	
-</script>
-
+</script>-->
 <script type="text/javascript">
-			$(function () { 
-				var processed_json = new Array();
-				var life_count,med_count,veh_count;
-				$.map(jsonData, function(obj, i) {
-					life_count =  $.grep(jsonData, function (element, index) { 
-						return element.policy.type == "Life";}).length;
-					med_count =  $.grep(jsonData, function (element, index) { 
-						return element.policy.type == "Medical";}).length;
-					veh_count =  $.grep(jsonData, function (element, index) { 
-						return element.policy.type == "Vehicle";}).length;
-				});
-				processed_json.push(["Vehicle", veh_count]);
-				processed_json.push(["Life", life_count]);
-				processed_json.push(["Medical", med_count]);
 
-				$('#pie-chart_div').highcharts({
-	        		chart: {
-            			type: 'pie',
-            			options3d: {
-							enabled: true,
-                			alpha: 60,
-                			beta:0,
-            			}
-        			},
-        			title: {
-        				text: 'Total Sales by Type'
-        			},
-        			tooltip: {
-        				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        			},
-	       			plotOptions: {
-		   	        	pie: {
-    	            		depth: 30,
-    	            		allowPointSelect: true,
-                			cursor: 'pointer',
-                			dataLabels: {
-                    			enabled: true,
-                    			format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    			style: {
-                        			color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    			}
-                			}
-            			}
-        			},
-	        
-		     	   	series: [{
-		     	   		type: 'pie',
-            			name: 'Policy Type',
-    	     			data: processed_json
-        			}]
-    			});
-  			});
-		</script>
+	/* function loadView(url) {
+		$("#bar-chart_div").load(url);
+	} */
+	$(function () { 
 		
 		
+		
+		var lap = new Array();
+		var app = new Array();
+		var sur = new Array();
+		var jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec;
+		
+		var data = $.grep(jsonData, function(element, index) {
+			return element.policy.start_date; 
+		});
+			
+ 		function init() {
+ 			jan = 0;
+			feb = 0;
+			mar = 0;
+			apr = 0;
+			may = 0;
+			jun = 0;
+			jul = 0;
+			aug = 0;
+			sep = 0;
+			oct = 0;
+			nov = 0;
+			dec = 0;
+ 		}
+	
+ 		function pushArray(i) {
+			switch((data[i].policy.start_date).split("-")[1]) {
+				case "January"	:	jan++;
+									break;
+				case "February"	:	feb++;
+									break;	
+				case "March"	:	mar++;
+									break;
+				case "April"	:	apr++;
+									break;
+				case "May"		:	may++;
+									break;
+				case "June"		:	jun++;
+									break;
+				case "July"		:	jul++;
+									break;
+				case "August"	:	aug++;
+									break;
+				case "September":	sep++;
+									break;
+				case "October"	:	oct++;
+									break;
+				case "November"	:	nov++;
+									break;
+				case "December"	:	dec++;
+									break;												
+			}	
+		}
+
+		init();
+		for(var i=0;i<data.length;i++) {
+			if(data[i].policy.status == "approved") {
+				pushArray(i);
+			}
+		}
+		app.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+		
+		init();
+		for(var i=0;i<data.length;i++) {
+			if(data[i].policy.status == "surrendered") {
+				pushArray(i);
+			}
+		}
+		sur.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+	
+		init();
+		for(var i=0;i<data.length;i++) {
+			if(data[i].policy.status == "lapsed") {
+				pushArray(i);
+			}
+		}
+		lap.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+
+		$('#chart_div').highcharts({
+			title: {
+				text: 'Monthly Policy Status'
+			},
+			xAxis: {
+				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			},
+			yAxis: {
+				title: {
+					text: 'No. of Policies'
+				},
+				plotLines: [{
+	    			value: 0,
+    				width: 1,
+    				color: '#808080'
+				}]
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle',
+				borderWidth: 0
+			},
+	 	   	series: [{
+ 		   		name: 'Lapsed',
+ 				data: lap
+			},
+			{
+ 	   			name: 'Surrendered',
+ 				data: sur
+			},
+			{
+	 	   		name: 'Approved',
+ 				data: app
+			}]
+		});
+	});
+</script>		
 </head>
 <body>
 	<div class="">
@@ -309,16 +434,14 @@
 			<div class="col-sm-2" style="">
 				<button type="button" class="btn btn-info">Save Query</button>
 			</div>
-			<div class="col-sm-2" style="">
-				<button type="button" class="btn btn-info">Reset Filters</button>
-			</div>
 		</div>
 	</div>
 
 <div class="row">
 	<div id="leftPane" class="col-md-3">
 		<ul class="nav nav-pills nav-stacked">
- 		 	<li role="presentation" class="list-group-item">Sales report by type</li>
+			<li id="home" role="presentation" class="list-group-item">Home</li>
+ 		 	<li role="presentation" class="list-group-item"><a href="#" id="salesbyType">Sales report by type</a></li>
  			<li role="presentation"  class="list-group-item">Sales report by country</li>
  			<li class="divider"></li>
  			<li role="presentation" class="list-group-item">Sales report by month</li>
@@ -329,8 +452,7 @@
 		</ul>
 	</div>
 	<div id="chartContainerDiv" class="col-md-9">
-		<div id="pie-chart_div" style="float: left;"></div>
-		<div id="bar-chart_div" style="float: left; padding-left:4%;"></div>
+		<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</div>
 </div>
 </body>
