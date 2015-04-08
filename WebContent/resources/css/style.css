@@ -12,10 +12,6 @@ body {
 	padding: 10px;
 }
 
-.border_box {
-	border: 1px #e4e4e4 solid;
-}
-
 .input-group-addon {
 	padding: 6px 5px;
 }
@@ -29,4 +25,15 @@ body {
 }
 .leftPane{
 	padding:5px;
+}
+.reportBy>li{
+	font:11px;
+	font-weight:bold;
+}
+#title{
+	color: grey;
+	padding-left: 20px;
+}
+.navContainer{
+	overflow:hidden;
 }

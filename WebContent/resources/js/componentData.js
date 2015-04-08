@@ -1,6 +1,17 @@
 /**
  * 
  */
+$(document).ready(function(){
+		$("#chartDiv").load("Home.html");
+	$("#salesByType").click(function(){
+		$("#chartDiv").load("Sales By Type.html");
+	});
+	$("#home").click(function(){
+		$("#chartDiv").empty();
+		$("#chartDiv").load("Home.html");
+	});
+});
+
 var countryData = [{"label":"India", "value":"India"},
                    {"label":"USA", "value":"USA"},
                    {"label":"Italy", "value":"Italy"},
@@ -39,8 +50,6 @@ var selectorData = [ {"label":"=","value":"="},
                      {"label":"<","value":"<"},
                      {"label":">=","value":">="},
                      {"label":"<=","value":"<="}];
-
-
 var cityTempData = [
                     {
                         "label": "Trivandrum",
@@ -254,48 +263,47 @@ var ageSlabData =  [
                   {"label":"61+","value":"61+"}
                  ];
 $(function() {
-	$('#countryCombo').multiselect(
-			{
+	
+	$('#countryCombo').multiselect({
+			includeSelectAllOption : true,
+			buttonClass : 'btn btn-default col-sm-12 btn-sm',
+			numberDisplayed : 1,
+			buttonWidth : '100%',
+			nonSelectedText : "All",
+			dataprovider : countryData,
+			onChange : function(option, checked) {
+			var cities = $('#countryCombo option:selected');
+			var selected = [];
+			$(cities).each(function(index, brand) {
+				selected.push([ $(this).val() ]);
+			});
+
+			$('#cityCombo').multiselect('dataprovider', []);
+			
+			var cityValues = [];
+			for ( var i = 0; i < selected.length; i++) {
+				for ( var j = 0; j < cityData.length; j++) {
+					if (cityData[j].country.value == selected[i][0]) {
+						cityValues = cityValues.concat(cityData[j].country.cities);
+					}
+				}
+			}
+			$('#cityCombo').multiselect('dataprovider', cityValues);
+			// changeCity(option, checked);
+			}
+		});
+			$('#countryCombo').multiselect('dataprovider', countryData);
+
+			$('#cityCombo').multiselect({
 				includeSelectAllOption : true,
 				buttonClass : 'btn btn-default col-sm-12 btn-sm',
 				numberDisplayed : 1,
 				buttonWidth : '100%',
 				nonSelectedText : "All",
-				dataprovider : countryData,
 				onChange : function(option, checked) {
-					var cities = $('#countryCombo option:selected');
-					var selected = [];
-					$(cities).each(function(index, brand) {
-						selected.push([ $(this).val() ]);
-					});
-
-					$('#cityCombo').multiselect('dataprovider', []);
-					var cityValues = [];
-					for ( var i = 0; i < selected.length; i++) {
-						for ( var j = 0; j < cityData.length; j++) {
-							if (cityData[j].country.value == selected[i][0]) {
-								cityValues = cityValues
-										.concat(cityData[j].country.cities);
-							}
-						}
-
-					}
-					$('#cityCombo').multiselect('dataprovider', cityValues);
-					// changeCity(option, checked);
 				}
 			});
-	$('#countryCombo').multiselect('dataprovider', countryData);
-
-	$('#cityCombo').multiselect({
-		includeSelectAllOption : true,
-		buttonClass : 'btn btn-default col-sm-12 btn-sm',
-		numberDisplayed : 1,
-		buttonWidth : '100%',
-		nonSelectedText : "All",
-		onChange : function(option, checked) {
-		}
-	});
-	$('#cityCombo').multiselect('dataprovider', cityTempData);
+			$('#cityCombo').multiselect('dataprovider', cityTempData);
 
 	$('#policyTypeCombo').multiselect({
 		includeSelectAllOption : true,
@@ -365,14 +373,6 @@ $(function() {
 	});
 	$('#statusCombo').multiselect('dataprovider', statusData);
 
-	/*
-	 * $('#salesCombo').multiselect({ includeSelectAllOption : false,
-	 * buttonClass : 'btn btn-default col-sm-12 btn-sm', numberDisplayed : 1,
-	 * buttonWidth : '100%', nonSelectedText : "All", dataprovider:selectorData,
-	 * onChange : function(option, checked) { } });
-	 * $('#salesCombo').multiselect('dataprovider', selectorData);
-	 */
-
 	$('#soldCombo').multiselect({
 		includeSelectAllOption : false,
 		buttonClass : 'btn btn-default col-sm-12 btn-sm btn-height',
@@ -403,7 +403,7 @@ $(function() {
         defaultDate: "01/01/2015"
     });
     $('#datetimepicker7').datetimepicker({
-        defaultDate: "06/04/2015"
+        defaultDate: "08/04/2015"
     });
     $("#datetimepicker6").on("dp.change", function (e) {
         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
@@ -437,13 +437,6 @@ $(function() {
 	$("#salesFilterDiv").hide();
 	$("#soldFilterDiv").hide();
 });
-
-$(document).ready(function(){
-	$("#salesByType").click(function(){
-		$("#chart_div").load("SalesByType.html");
-	});
-});
-
 var filterConditions = [];
 function generateReport() {
 	filterConditions = [];
@@ -542,7 +535,6 @@ function generateReport() {
 		});
 	});
 	console.log(results);
-	drawChartFromResults(results);
 }
 
 function getSelectedComboValues(options) {
@@ -556,71 +548,4 @@ function getSelectedComboValues(options) {
 function changeCity(option, checked) {
 	console.info(option);
 	console.info(checked);
-}
-
-
-
-/* Draw the Chart from the search results */
-function drawChartFromResults(results) {
-
-	console.log("process");
-
-	var data = new google.visualization.DataTable();
-
-	data.addColumn('string', 'Month');
-	data.addColumn('number', 'Surrendered');
-	data.addColumn('number', 'Lapsed');
-	data.addColumn('number', 'Approved');
-
-	console.log("Results Obj Length:" + results.length);
-
-	for ( var i = 0; i < results.length; i++) {
-
-		var month;
-
-		if (month != results[i].policy.start_date) {
-
-			console.log("Date mismatched");
-			month = results[i].policy.start_date;
-		}
-
-
-		var sur = 0;
-		var lap = 0;
-		var appr = 0;
-		
-		for ( var k = 0; k < results.length; k++) {
-
-			if (results[i].policy.start_date == month) {
-
-				switch (results[k].policy.status) {
-
-				case "surrendered":
-					sur = sur + 1;
-					break;
-				case "approved":
-					appr = appr + 1;
-					break;
-				case "lapsed":
-					lap = lap + 1;
-					break;
-				}
-			}
-		}
-		data.addRow([ month, sur, lap, appr ]);
-
-		
-
-	}
-
-	var chart = new google.charts.Bar(document.getElementById('bar-chart_div'));
-	// Set chart options
-	var barOptions = {
-		'title' : 'Sales in a Look',
-		'width' : 700,
-		'height' : 400
-	};
-
-	chart.draw(data, barOptions);
-
 }

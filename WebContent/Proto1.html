@@ -33,311 +33,52 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-<!-- High Charts API  -->
+<!-- High Charts API --> 
 
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/highcharts-3d.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-<!-- <script>
-=======
-<!-- <script>
-	google.load('visualization', '1.0', {
-		'packages' : [ 'corechart' ]
-	});
-	google.load("visualization", "1.1", {
-		packages : [ "bar" ]
-	});
-	google.load("visualization", "1.1", {
-		packages : [ "timeline" ]
-	});
-	
-	//Load the Visualization API and the ready-made Google table visualization
-	google.load('visualization', '1', {'packages':['table']});
-	
-	//Set a callback to run when the Google Visualization API is loaded.
-    //google.setOnLoadCallback(drawChart);
-	//google.setOnLoadCallback(doGetFromResponse);
-
-	
-	/* function drawChart() {
-		
-		
-		console.log("Data:"+jsonData);
-
-
-							var data = new google.visualization.DataTable();
-
-							data.addColumn('string', 'Type');
-							data.addColumn('number', 'Count');
-
-							console.log("Aray Length:"+jsonData.length);
-							
-							data.addRow([ "Vehicle", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Vehicle";
-							}).length]);
-							data.addRow([ "Medical", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Medical";
-							}).length]);
-							data.addRow([ "Life", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Life";
-							}).length ]);
-							
-							var pieOptions = {
-									'title' : 'Total Sales By Type',
-									'width' : 500,
-									'height' : 400,
-									is3D : true
-								};
-							
-							// Instantiate and draw our chart, passing in some options.
-
-							var pieChart = new google.visualization.PieChart(
-									document.getElementById('pie-chart_div'));
-							pieChart.draw(data, pieOptions);
-} */
-
-	function doGetFromResponse() {
-		
-		//console.log("STart Date:"+('#startdate').data('date'));
-		var startdate = $('#startdate').val().substring(0, 2);
-		var enddate = $('#enddate').val().substring(0, 2);
-		
-		
-		
-		//console.log("Received Click for Policy Type:"+policytype.options[policytype.selectedIndex].text+" Gender:"+gender.options[gender.selectedIndex].text);
-		var query = new google.visualization.Query('/InsuranceApp/datatable');
-		
-		
-		
-		if(startdate){
-			
-			console.log("Start Date:"+ startdate+" To:"+enddate);
-			var month = new Array();
-			month[01] = "Jan";
-			month[02] = "Feb";
-			month[03] = "Mar";
-			month[04] = "Apr";
-			month[05] = "May";
-			month[06] = "Jun";
-			month[07] = "Jul";
-			month[08] = "Aug";
-			month[09] = "Sep";
-			month[10] = "Oct";
-			month[11] = "Nov";
-			month[12] = "Dec";
-			
-			var months = "";
-			
-			for(var i=parseInt(startdate); i <=parseInt(enddate);i++){
-				months = months+"'"+month[i]+"'";
-				if(i!=parseInt(enddate)){
-					months = months+",";
-				}
-			}
-			
-			//console.log("Query Set"+months);
-			
-			query.setQuery("select year, surcount,lapcount,soldcount where year like '"+month[parseInt(startdate)]+"'");
-		}
-		
-		//query.setQuery("select type, agent,gender where gender like '"+gender.options[gender.selectedIndex].text+"' AND type like '"+policytype.options[policytype.selectedIndex].text+"'");
-
-	    // Send the query with a callback function.
-	    query.send(handleQueryResponse);
-	  }
-
-	  // Handle the query response.
-	   function handleQueryResponse(response) {
-	    if (response.isError()) {
-	      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-	      return;
-	    }
-
-	    // Draw the visualization.
-	    var data = response.getDataTable();
-	    var chart = new google.charts.Bar(document.getElementById('bar-chart_div'));
-	    
-	 // Set chart options
-		var barOptions = {
-			'title' : 'Sales in a Look',
-			'width' : 700,
-			'height' : 400
-		};
-	 
-	    chart.draw(data, barOptions);
-		
-	}
-	  
-	
-</script>-->
-<script type="text/javascript">
-
-	/* function loadView(url) {
-		$("#bar-chart_div").load(url);
-	} */
-	$(function () { 
-		
-		
-		
-		var lap = new Array();
-		var app = new Array();
-		var sur = new Array();
-		var jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec;
-		
-		var data = $.grep(jsonData, function(element, index) {
-			return element.policy.start_date; 
-		});
-			
- 		function init() {
- 			jan = 0;
-			feb = 0;
-			mar = 0;
-			apr = 0;
-			may = 0;
-			jun = 0;
-			jul = 0;
-			aug = 0;
-			sep = 0;
-			oct = 0;
-			nov = 0;
-			dec = 0;
- 		}
-	
- 		function pushArray(i) {
-			switch((data[i].policy.start_date).split("-")[1]) {
-				case "January"	:	jan++;
-									break;
-				case "February"	:	feb++;
-									break;	
-				case "March"	:	mar++;
-									break;
-				case "April"	:	apr++;
-									break;
-				case "May"		:	may++;
-									break;
-				case "June"		:	jun++;
-									break;
-				case "July"		:	jul++;
-									break;
-				case "August"	:	aug++;
-									break;
-				case "September":	sep++;
-									break;
-				case "October"	:	oct++;
-									break;
-				case "November"	:	nov++;
-									break;
-				case "December"	:	dec++;
-									break;												
-			}	
-		}
-
-		init();
-		for(var i=0;i<data.length;i++) {
-			if(data[i].policy.status == "approved") {
-				pushArray(i);
-			}
-		}
-		app.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
-		
-		init();
-		for(var i=0;i<data.length;i++) {
-			if(data[i].policy.status == "surrendered") {
-				pushArray(i);
-			}
-		}
-		sur.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
-	
-		init();
-		for(var i=0;i<data.length;i++) {
-			if(data[i].policy.status == "lapsed") {
-				pushArray(i);
-			}
-		}
-		lap.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
-
-		$('#chart_div').highcharts({
-			title: {
-				text: 'Monthly Policy Status'
-			},
-			xAxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			},
-			yAxis: {
-				title: {
-					text: 'No. of Policies'
-				},
-				plotLines: [{
-	    			value: 0,
-    				width: 1,
-    				color: '#808080'
-				}]
-			},
-			legend: {
-				layout: 'vertical',
-				align: 'right',
-				verticalAlign: 'middle',
-				borderWidth: 0
-			},
-	 	   	series: [{
- 		   		name: 'Lapsed',
- 				data: lap
-			},
-			{
- 	   			name: 'Surrendered',
- 				data: sur
-			},
-			{
-	 	   		name: 'Approved',
- 				data: app
-			}]
-		});
-	});
-</script>		
 </head>
 <body>
-	<div class="">
-		<div id="" style="padding-top: 10px;">
-			<p style="float: right;">
-				Hi Admin
+	<div class="navContainer">
+		<span id="UserBar" class="pull-right">
+				Hi, <strong><span>Admin</span></strong>
 				<button type="button" class="btn btn-link">Logout</button>
-			</p>
-			<h3 style="color: grey; padding-left: 20px;">Insurance Analytics
-				Dashboard</h3>
-		</div>
+		</span>
+		<h3><span id="title">Insurance Analytics
+				Dashboard</span></h3>
 	</div>
-	<div id="filterContainerDiv" class="filtergroup">
-		<div class="row">
+	<div class="row filtergroup"  id="filterContainerDiv">
 			<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Select
+					<span class="input-group-addon">Select
 						Country</span> <select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="countries" id="countryCombo">
+						data-toggle="dropdown" id="countryCombo">
 					</select>
 				</div>
 			</div>
 			<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Select
+					<span class="input-group-addon">Select
 						City</span> <select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="countries" id="cityCombo">
+						data-toggle="dropdown"id="cityCombo">
 					</select>
 				</div>
 			</div>
 			<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Select
+					<span class="input-group-addon">Select
 						Policy Type</span> <select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="countries" id="policyTypeCombo">
+						data-toggle="dropdown" id="policyTypeCombo">
 					</select>
 				</div>
 			</div>
 			<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Select
+					<span class="input-group-addon">Select
 						Agents</span> <select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="countries" id="agentsCombo">
+						data-toggle="dropdown" id="agentsCombo">
 					</select>
 				</div>
 			</div>
@@ -361,20 +102,20 @@
 					</div>
 				</div>
 			</div>
-		</div>
+
 		<div class="row">
 			<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Group by</span> <select
-						data-hover="dropdown" data-toggle="dropdown" class="groupby"
+					<span class="input-group-addon">Group by</span> <select
+						data-hover="dropdown" data-toggle="dropdown"
 						id="groupByCombo">
 					</select>
 				</div>
 			</div>
 			<div class="col-sm-2">
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Policy Status</span> <select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="groupby" id="statusCombo">
+					<span class="input-group-addon">Policy Status</span> <select multiple="multiple" data-hover="dropdown"
+						data-toggle="dropdown"id="statusCombo">
 					</select>
 				</div>
 			</div>
@@ -382,7 +123,7 @@
 				<div class="input-group">
 					<span class="input-group-addon">Select Gender</span> 
 						<select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="groupby" id="genderCombo">
+						data-toggle="dropdown" id="genderCombo">
 					</select>
 				</div>
 			</div>
@@ -390,7 +131,7 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="ageFilter">Select age limit</span> 
 						<select multiple="multiple" data-hover="dropdown"
-						data-toggle="dropdown" class="age" id="ageSlabCombo">
+						data-toggle="dropdown" id="ageSlabCombo">
 					</select>
 				</div>
 			</div>
@@ -412,9 +153,9 @@
 	      				<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" data-hover="dropdown" data-toggle="dropdown" id="soldCombo">
 	        				<span class="caret"></span>
 	        			</button>
-	        	    </div><!-- /btn-group -->
+	        	    </div>
 	      			<input type="text" class="form-control" aria-label="...">
-	    		</div><!-- /input-group -->
+	    		</div>
 			</div>
 		</div>
 		<div class="row">
@@ -439,20 +180,18 @@
 
 <div class="row">
 	<div id="leftPane" class="col-md-3">
-		<ul class="nav nav-pills nav-stacked">
-			<li id="home" role="presentation" class="list-group-item">Home</li>
- 		 	<li role="presentation" class="list-group-item"><a href="#" id="salesbyType">Sales report by type</a></li>
- 			<li role="presentation"  class="list-group-item">Sales report by country</li>
- 			<li class="divider"></li>
- 			<li role="presentation" class="list-group-item">Sales report by month</li>
- 			<li role="presentation" class="list-group-item">Sales report by year</li>
- 			<li role="presentation" class="divider"></li>
-   			<li role="presentation" class="list-group-item">Sales report by agent</li>
-  			<li role="presentation"  class="list-group-item">Sales report by age group</li>
+		<ul class="list-group reportBy">
+			<li class="list-group-item"><a id="home" href="#">Home</a></li>
+ 		 	<li class="list-group-item"><a id="salesByType" href="#">Sales report by type</a></li>
+ 			<li class="list-group-item">Sales report by country</li>
+ 			<li class="list-group-item">Sales report by month</li>
+ 			<li class="list-group-item">Sales report by year</li>
+   			<li class="list-group-item">Sales report by agent</li>
+  			<li class="list-group-item">Sales report by age group</li>
 		</ul>
 	</div>
 	<div id="chartContainerDiv" class="col-md-9">
-		<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div id="chartDiv"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</div>
 </div>
 </body>
