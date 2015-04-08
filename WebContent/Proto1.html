@@ -171,36 +171,38 @@
 </script> -->
 
 <script type="text/javascript">
-$(function () { 
+	$(function () { 
+		$('li a').click(function (e) {
+		    e.preventDefault();
+		    $("#bar-chart_div").load(this.href);
+		});
+		
+		var lap = new Array();
+		var app = new Array();
+		var sur = new Array();
+		var jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec;
+		
+		var data = $.grep(jsonData, function(element, index) {
+			return element.policy.start_date; 
+		});
+			
+ 		function init() {
+ 			jan = 0;
+			feb = 0;
+			mar = 0;
+			apr = 0;
+			may = 0;
+			jun = 0;
+			jul = 0;
+			aug = 0;
+			sep = 0;
+			oct = 0;
+			nov = 0;
+			dec = 0;
+ 		}
 	
-
-	var lap = new Array();
-	var app = new Array();
-	var sur = new Array();
-	var jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec;
-	
-
-	var data = $.grep(jsonData, function(element, index) {
-		return element.policy.start_date; 
-	});
-	
- 	function init() {
- 		jan = 0;
-		feb = 0;
-		mar = 0;
-		apr = 0;
-		may = 0;
-		jun = 0;
-		jul = 0;
-		aug = 0;
-		sep = 0;
-		oct = 0;
-		nov = 0;
-		dec = 0;
- 	}
-
- 	function pushArray(i) {
-		switch((data[i].policy.start_date).split("-")[1]) {
+ 		function pushArray(i) {
+			switch((data[i].policy.start_date).split("-")[1]) {
 				case "January"	:	jan++;
 									break;
 				case "February"	:	feb++;
@@ -226,78 +228,70 @@ $(function () {
 				case "December"	:	dec++;
 									break;												
 			}	
-	}
-
-	init();
-
-	for(var i=0;i<data.length;i++) {
-		if(data[i].policy.status == "approved") {
-			pushArray(i);
 		}
-	}
-	app.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+
+		init();
+		for(var i=0;i<data.length;i++) {
+			if(data[i].policy.status == "approved") {
+				pushArray(i);
+			}
+		}
+		app.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+		
+		init();
+		for(var i=0;i<data.length;i++) {
+			if(data[i].policy.status == "surrendered") {
+				pushArray(i);
+			}
+		}
+		sur.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
 	
-	init();
-
-	for(var i=0;i<data.length;i++) {
-		if(data[i].policy.status == "surrendered") {
-			pushArray(i);
+		init();
+		for(var i=0;i<data.length;i++) {
+			if(data[i].policy.status == "lapsed") {
+				pushArray(i);
+			}
 		}
-	}
-	sur.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+		lap.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
 
-	init();
-	
-	for(var i=0;i<data.length;i++) {
-		if(data[i].policy.status == "lapsed") {
-			pushArray(i);
-		}
-	}
-	lap.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
-
-
-
-	$('#bar-chart_div').highcharts({
-		title: {
-			text: 'Monthly Policy Status'
-		},
-		xAxis: {
-			categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			},
-		yAxis: {
+		$('#bar-chart_div').highcharts({
 			title: {
-				text: 'No. of Policies'
+				text: 'Monthly Policy Status'
 			},
-			plotLines: [{
-    			value: 0,
-    			width: 1,
-    			color: '#808080'
-			}]
-		},
+			xAxis: {
+				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			},
+			yAxis: {
+				title: {
+					text: 'No. of Policies'
+				},
+				plotLines: [{
+	    			value: 0,
+    				width: 1,
+    				color: '#808080'
+				}]
+			},
 			legend: {
-			layout: 'vertical',
-			align: 'right',
-			verticalAlign: 'middle',
-			borderWidth: 0
-		},
-
- 	   	series: [{
- 	   		name: 'Lapsed',
- 			data: lap
-		},
-		{
- 	   		name: 'Surrendered',
- 			data: sur
-		},
-		{
- 	   		name: 'Approved',
- 			data: app
-		}	]
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle',
+				borderWidth: 0
+			},
+	 	   	series: [{
+ 		   		name: 'Lapsed',
+ 				data: lap
+			},
+			{
+ 	   			name: 'Surrendered',
+ 				data: sur
+			},
+			{
+	 	   		name: 'Approved',
+ 				data: app
+			}]
+		});
 	});
-	});
-		</script>
-		
-		
+</script>		
 </head>
 <body>
 	<div class="">
@@ -446,7 +440,7 @@ $(function () {
 <div class="row">
 	<div id="leftPane" class="col-md-3">
 		<ul class="nav nav-pills nav-stacked">
- 		 	<li role="presentation" class="list-group-item">Sales report by type</li>
+ 		 	<li role="presentation" class="list-group-item"><a href="highcharts.html" class="salesByType">Sales report by type</a></li>
  			<li role="presentation"  class="list-group-item">Sales report by country</li>
  			<li class="divider"></li>
  			<li role="presentation" class="list-group-item">Sales report by month</li>
@@ -457,7 +451,7 @@ $(function () {
 		</ul>
 	</div>
 	<div id="chartContainerDiv" class="col-md-9">
-		<div id="pie-chart_div" style="float: left;"></div>
+		<!-- <div id="pie-chart_div" style="float: left;"></div> -->
 		<div id="bar-chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</div>
 </div>
