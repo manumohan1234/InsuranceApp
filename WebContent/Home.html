@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="policy.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/highcharts-3d.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			$(function () { 
+			
+
+				var lap = new Array();
+				var app = new Array();
+				var sur = new Array();
+				var jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec;
+				
+
+				var data = $.grep(jsonData, function(element, index) {
+					return element.policy.start_date; 
+				});
+				
+			 	function init() {
+			 		jan = 0;
+					feb = 0;
+					mar = 0;
+					apr = 0;
+					may = 0;
+					jun = 0;
+					jul = 0;
+					aug = 0;
+					sep = 0;
+					oct = 0;
+					nov = 0;
+					dec = 0;
+			 	}
+
+			 	function pushArray(i) {
+					switch((data[i].policy.start_date).split("-")[1]) {
+							case "January"	:	jan++;
+												break;
+							case "February"	:	feb++;
+												break;	
+							case "March"	:	mar++;
+												break;
+							case "April"	:	apr++;
+												break;
+							case "May"		:	may++;
+												break;
+							case "June"		:	jun++;
+												break;
+							case "July"		:	jul++;
+												break;
+							case "August"	:	aug++;
+												break;
+							case "September":	sep++;
+												break;
+							case "October"	:	oct++;
+												break;
+							case "November"	:	nov++;
+												break;
+							case "December"	:	dec++;
+												break;												
+						}	
+				}
+
+				init();
+
+				for(var i=0;i<data.length;i++) {
+					if(data[i].policy.status == "approved") {
+						pushArray(i);
+					}
+				}
+				app.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+				
+				init();
+
+				for(var i=0;i<data.length;i++) {
+					if(data[i].policy.status == "surrendered") {
+						pushArray(i);
+					}
+				}
+				sur.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+
+				init();
+				
+				for(var i=0;i<data.length;i++) {
+					if(data[i].policy.status == "lapsed") {
+						pushArray(i);
+					}
+				}
+				lap.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
+
+
+
+				$('#container').highcharts({
+	        		title: {
+        				text: 'Monthly Policy Status'
+        			},
+        			xAxis: {
+        				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      				},
+        			yAxis: {
+        				title: {
+        					text: 'No. of Policies'
+        				},
+            			plotLines: [{
+                			value: 0,
+                			width: 1,
+                			color: '#808080'
+            			}]
+        			},
+	       			legend: {
+            			layout: 'vertical',
+            			align: 'right',
+            			verticalAlign: 'middle',
+            			borderWidth: 0
+        			},
+	        
+		     	   	series: [{
+		     	   		name: 'Lapsed',
+    	     			data: lap
+        			},
+        			{
+		     	   		name: 'Surrendered',
+    	     			data: sur
+        			},
+        			{
+		     	   		name: 'Approved',
+    	     			data: app
+        			}	]
+    			});
+  			});
+		</script>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</body>
+</html>
