@@ -172,9 +172,6 @@
 
 <script type="text/javascript">
 
-	/* function loadView(url) {
-		$("#bar-chart_div").load(url);
-	} */
 	$(function () { 
 		
 		
@@ -256,9 +253,9 @@
 		}
 		lap.push(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
 
-		$('#bar-chart_div').highcharts({
+		$('#chart_div').highcharts({
 			title: {
-				text: 'Monthly Policy Status'
+				text: 'Policy Status'
 			},
 			xAxis: {
 				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -442,8 +439,8 @@
 <div class="row">
 	<div id="leftPane" class="col-md-3">
 		<ul class="nav nav-pills nav-stacked">
-			<li id="home" role="presentation" class="list-group-item">Home</li>
- 		 	<li role="presentation" class="list-group-item"><a href="SalesByType.html" id="salesbyType">Sales report by type</a></li>
+			<li role="presentation" class="list-group-item"><a id="home" href="#">Home</a></li>
+ 		 	<li role="presentation" class="list-group-item"><a id="salesByType" href="#">Sales report by type</a></li>
  			<li role="presentation"  class="list-group-item">Sales report by country</li>
  			<li class="divider"></li>
  			<li role="presentation" class="list-group-item">Sales report by month</li>

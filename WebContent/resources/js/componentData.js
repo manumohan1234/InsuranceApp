@@ -1,6 +1,15 @@
 /**
  * 
  */
+$(document).ready(function(){
+	$("#salesByType").click(function(){
+		$("#chart_div").load("SalesByType.html");
+	});
+	$("#home").click(function(){
+		$("#chart_div").load("Home.html");
+	});
+});
+
 var countryData = [{"label":"India", "value":"India"},
                    {"label":"USA", "value":"USA"},
                    {"label":"Italy", "value":"Italy"},
@@ -438,11 +447,6 @@ $(function() {
 	$("#soldFilterDiv").hide();
 });
 
-$document.ready(function(){
-	$("#home").click(function(){
-		$("#bar-chart_div").load("Home.html");
-	});
-});
 
 var filterConditions = [];
 function generateReport() {
