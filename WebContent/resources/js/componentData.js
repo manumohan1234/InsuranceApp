@@ -1,11 +1,16 @@
-/**
- * 
- */
 $(document).ready(function(){
 	$("#salesByType").click(function(){
+		$("#chart_div").empty();
+		/*$("#chartContainerDiv").append(
+				'<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>'
+		);*/
 		$("#chart_div").load("SalesByType.html");
 	});
 	$("#home").click(function(){
+		$("#chart_div").empty();
+		/*$("#chartContainerDiv").append(
+				'<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>'
+		);*/
 		$("#chart_div").load("Home.html");
 	});
 });
@@ -373,14 +378,6 @@ $(function() {
 		}
 	});
 	$('#statusCombo').multiselect('dataprovider', statusData);
-
-	/*
-	 * $('#salesCombo').multiselect({ includeSelectAllOption : false,
-	 * buttonClass : 'btn btn-default col-sm-12 btn-sm', numberDisplayed : 1,
-	 * buttonWidth : '100%', nonSelectedText : "All", dataprovider:selectorData,
-	 * onChange : function(option, checked) { } });
-	 * $('#salesCombo').multiselect('dataprovider', selectorData);
-	 */
 
 	$('#soldCombo').multiselect({
 		includeSelectAllOption : false,

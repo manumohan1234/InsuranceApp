@@ -39,137 +39,6 @@
 <script src="http://code.highcharts.com/highcharts-3d.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-<!-- <script>
-	google.load('visualization', '1.0', {
-		'packages' : [ 'corechart' ]
-	});
-	google.load("visualization", "1.1", {
-		packages : [ "bar" ]
-	});
-	google.load("visualization", "1.1", {
-		packages : [ "timeline" ]
-	});
-	
-	//Load the Visualization API and the ready-made Google table visualization
-	google.load('visualization', '1', {'packages':['table']});
-	
-	//Set a callback to run when the Google Visualization API is loaded.
-    //google.setOnLoadCallback(drawChart);
-	//google.setOnLoadCallback(doGetFromResponse);
-
-	
-	/* function drawChart() {
-		
-		
-		console.log("Data:"+jsonData);
-
-
-							var data = new google.visualization.DataTable();
-
-							data.addColumn('string', 'Type');
-							data.addColumn('number', 'Count');
-
-							console.log("Aray Length:"+jsonData.length);
-							
-							data.addRow([ "Vehicle", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Vehicle";
-							}).length]);
-							data.addRow([ "Medical", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Medical";
-							}).length]);
-							data.addRow([ "Life", $.grep(jsonData, function (element, index) {
-							    return element.policy.type == "Life";
-							}).length ]);
-							
-							var pieOptions = {
-									'title' : 'Total Sales By Type',
-									'width' : 500,
-									'height' : 400,
-									is3D : true
-								};
-							
-							// Instantiate and draw our chart, passing in some options.
-
-							var pieChart = new google.visualization.PieChart(
-									document.getElementById('pie-chart_div'));
-							pieChart.draw(data, pieOptions);
-} */
-	
-	function doGetFromResponse() {
-		
-		//console.log("STart Date:"+('#startdate').data('date'));
-		var startdate = $('#startdate').val().substring(0, 2);
-		var enddate = $('#enddate').val().substring(0, 2);
-		
-		
-		
-		//console.log("Received Click for Policy Type:"+policytype.options[policytype.selectedIndex].text+" Gender:"+gender.options[gender.selectedIndex].text);
-		var query = new google.visualization.Query('/InsuranceApp/datatable');
-		
-		
-		
-		if(startdate){
-			
-			console.log("Start Date:"+ startdate+" To:"+enddate);
-			var month = new Array();
-			month[01] = "Jan";
-			month[02] = "Feb";
-			month[03] = "Mar";
-			month[04] = "Apr";
-			month[05] = "May";
-			month[06] = "Jun";
-			month[07] = "Jul";
-			month[08] = "Aug";
-			month[09] = "Sep";
-			month[10] = "Oct";
-			month[11] = "Nov";
-			month[12] = "Dec";
-			
-			var months = "";
-			
-			for(var i=parseInt(startdate); i <=parseInt(enddate);i++){
-				months = months+"'"+month[i]+"'";
-				if(i!=parseInt(enddate)){
-					months = months+",";
-				}
-			}
-			
-			//console.log("Query Set"+months);
-			
-			query.setQuery("select year, surcount,lapcount,soldcount where year like '"+month[parseInt(startdate)]+"'");
-		}
-		
-		//query.setQuery("select type, agent,gender where gender like '"+gender.options[gender.selectedIndex].text+"' AND type like '"+policytype.options[policytype.selectedIndex].text+"'");
-
-	    // Send the query with a callback function.
-	    query.send(handleQueryResponse);
-	  }
-
-	  // Handle the query response.
-	   function handleQueryResponse(response) {
-	    if (response.isError()) {
-	      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-	      return;
-	    }
-
-	    // Draw the visualization.
-	    var data = response.getDataTable();
-	    var chart = new google.charts.Bar(document.getElementById('bar-chart_div'));
-	    
-	 // Set chart options
-		var barOptions = {
-			'title' : 'Sales in a Look',
-			'width' : 700,
-			'height' : 400
-		};
-	 
-	    chart.draw(data, barOptions);
-		
-	}
-	  
-	
-</script> -->
-
 <script type="text/javascript">
 
 	$(function () { 
@@ -442,16 +311,17 @@
 			<li role="presentation" class="list-group-item"><a id="home" href="#">Home</a></li>
  		 	<li role="presentation" class="list-group-item"><a id="salesByType" href="#">Sales report by type</a></li>
  			<li role="presentation"  class="list-group-item">Sales report by country</li>
- 			<li class="divider"></li>
+ 			
  			<li role="presentation" class="list-group-item">Sales report by month</li>
  			<li role="presentation" class="list-group-item">Sales report by year</li>
- 			<li role="presentation" class="divider"></li>
+ 			
    			<li role="presentation" class="list-group-item">Sales report by agent</li>
   			<li role="presentation"  class="list-group-item">Sales report by age group</li>
 		</ul>
 	</div>
 	<div id="chartContainerDiv" class="col-md-9">
 		<div id="chart_div"  style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		
 	</div>
 </div>
 </body>
