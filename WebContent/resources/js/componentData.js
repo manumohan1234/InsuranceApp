@@ -1,13 +1,9 @@
-/**
- * 
- */
 $(document).ready(function(){
-		$("#chartDiv").load("Home.html");
+	$("#chartDiv").load("Home.html");
 	$("#salesByType").click(function(){
-		$("#chartDiv").load("Sales By Type.html");
+		$("#chartDiv").load("Sales-By-Type.html");
 	});
 	$("#home").click(function(){
-		$("#chartDiv").empty();
 		$("#chartDiv").load("Home.html");
 	});
 });
@@ -50,6 +46,8 @@ var selectorData = [ {"label":"=","value":"="},
                      {"label":"<","value":"<"},
                      {"label":">=","value":">="},
                      {"label":"<=","value":"<="}];
+
+
 var cityTempData = [
                     {
                         "label": "Trivandrum",
@@ -263,47 +261,48 @@ var ageSlabData =  [
                   {"label":"61+","value":"61+"}
                  ];
 $(function() {
-	
-	$('#countryCombo').multiselect({
-			includeSelectAllOption : true,
-			buttonClass : 'btn btn-default col-sm-12 btn-sm',
-			numberDisplayed : 1,
-			buttonWidth : '100%',
-			nonSelectedText : "All",
-			dataprovider : countryData,
-			onChange : function(option, checked) {
-			var cities = $('#countryCombo option:selected');
-			var selected = [];
-			$(cities).each(function(index, brand) {
-				selected.push([ $(this).val() ]);
-			});
-
-			$('#cityCombo').multiselect('dataprovider', []);
-			
-			var cityValues = [];
-			for ( var i = 0; i < selected.length; i++) {
-				for ( var j = 0; j < cityData.length; j++) {
-					if (cityData[j].country.value == selected[i][0]) {
-						cityValues = cityValues.concat(cityData[j].country.cities);
-					}
-				}
-			}
-			$('#cityCombo').multiselect('dataprovider', cityValues);
-			// changeCity(option, checked);
-			}
-		});
-			$('#countryCombo').multiselect('dataprovider', countryData);
-
-			$('#cityCombo').multiselect({
+	$('#countryCombo').multiselect(
+			{
 				includeSelectAllOption : true,
 				buttonClass : 'btn btn-default col-sm-12 btn-sm',
 				numberDisplayed : 1,
 				buttonWidth : '100%',
 				nonSelectedText : "All",
+				dataprovider : countryData,
 				onChange : function(option, checked) {
+					var cities = $('#countryCombo option:selected');
+					var selected = [];
+					$(cities).each(function(index, brand) {
+						selected.push([ $(this).val() ]);
+					});
+
+					$('#cityCombo').multiselect('dataprovider', []);
+					var cityValues = [];
+					for ( var i = 0; i < selected.length; i++) {
+						for ( var j = 0; j < cityData.length; j++) {
+							if (cityData[j].country.value == selected[i][0]) {
+								cityValues = cityValues
+										.concat(cityData[j].country.cities);
+							}
+						}
+
+					}
+					$('#cityCombo').multiselect('dataprovider', cityValues);
+					// changeCity(option, checked);
 				}
 			});
-			$('#cityCombo').multiselect('dataprovider', cityTempData);
+	$('#countryCombo').multiselect('dataprovider', countryData);
+
+	$('#cityCombo').multiselect({
+		includeSelectAllOption : true,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		onChange : function(option, checked) {
+		}
+	});
+	$('#cityCombo').multiselect('dataprovider', cityTempData);
 
 	$('#policyTypeCombo').multiselect({
 		includeSelectAllOption : true,
@@ -403,7 +402,7 @@ $(function() {
         defaultDate: "01/01/2015"
     });
     $('#datetimepicker7').datetimepicker({
-        defaultDate: "08/04/2015"
+        defaultDate: "06/04/2015"
     });
     $("#datetimepicker6").on("dp.change", function (e) {
         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
@@ -437,6 +436,8 @@ $(function() {
 	$("#salesFilterDiv").hide();
 	$("#soldFilterDiv").hide();
 });
+
+
 var filterConditions = [];
 function generateReport() {
 	filterConditions = [];
@@ -535,6 +536,7 @@ function generateReport() {
 		});
 	});
 	console.log(results);
+	drawChartFromResults(results);
 }
 
 function getSelectedComboValues(options) {
@@ -549,3 +551,4 @@ function changeCity(option, checked) {
 	console.info(option);
 	console.info(checked);
 }
+
