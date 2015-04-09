@@ -88,8 +88,7 @@
 		}
 		lap.push(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
 
-		$('#lineChart')
-				.highcharts(
+		$('#lineChart').highcharts(
 						{
 							title : {
 								text : 'Policy Status'
@@ -111,7 +110,7 @@
 							},
 							legend : {
 								layout : 'vertical',
-								align : 'right',
+								align : 'left',
 								verticalAlign : 'middle',
 								borderWidth : 0
 							},
@@ -128,5 +127,4 @@
 						});
 	});
 </script>
-<div id="lineChart"
-	style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="lineChart"></div>
