@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+$(function () {
+	var lap = new Array();
+	var sur = new Array();
+	var app = new Array();
+	var app_ind = 0,
+		app_ita = 0,
+		app_usa = 0,
+		app_fra = 0,
+		sur_ind = 0,
+		sur_ita = 0,
+		sur_usa = 0,
+		sur_fra = 0,
+		lap_ind = 0,
+		lap_ita = 0,
+		lap_usa = 0,
+		lap_fra = 0;
+	
+	var data = $.grep(jsonData, function(element, index) {
+		return element.policy;
+	});
+		
+	function pushApp(i) {
+		switch(data[i].country) {
+			case "India"  : app_ind++;
+							break;
+			case "USA"	  : app_usa++;
+							break;
+			case "Italy"  : app_ita++;
+							break;
+			case "France" :	app_fra++;
+							break;
+		}
+	}
+	function pushSur(i) {
+		switch(data[i].country) {
+			case "India"  : sur_ind++;
+							break;
+			case "USA"	  : sur_usa++;
+							break;
+			case "Italy"  : sur_ita++;
+							break;
+			case "France" :	sur_fra++;
+							break;
+		}
+	}
+	function pushLap(i) {
+		switch(data[i].country) {
+			case "India"  : lap_ind++;
+							break;
+			case "USA"	  : lap_usa++;
+							break;
+			case "Italy"  : lap_ita++;
+							break;
+			case "France" :	lap_fra++;
+							break;
+		}
+	}
+	for (var i = 0; i < data.length; i++) {
+		if (data[i].policy.type == "Vehicle") {
+			if(data[i].policy.status=="approved") {
+				pushApp(i);
+			}
+			else if(data[i].policy.status=="surrendered") {
+				pushSur(i);
+			}
+			else if(data[i].policy.status=="lapsed") {
+				pushLap(i);
+			}
+		}
+	}
+	
+	
+	app.push(app_ind,app_usa,app_ita,app_fra);
+	sur.push(sur_ind,sur_usa,sur_ita,sur_fra);
+	lap.push(lap_ind,lap_usa,lap_ita,lap_fra);
+	console.log(app,lap,sur);
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Policy Type: Medical'
+        },
+        xAxis: {
+            categories: ['India','USA','Italy','France'],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Policies'
+            }
+        },
+        tooltip: {
+        	pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'	
+        },
+        plotOptions: {
+        	dataLabels: {
+    			enabled: true,
+    			format: '<b>{point.name}</b>',
+    			style: {
+        			color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+    			}
+			},
+            column: {
+            	dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: 'Approved',
+            data: app
+        }, {
+            name: 'Surrendered',
+            data: sur
+
+        }, {
+            name: 'Lapsed',
+            data: lap
+
+        }]
+    });
+});
+</script>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>
