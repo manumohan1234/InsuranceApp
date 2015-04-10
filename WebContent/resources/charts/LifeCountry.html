@@ -1,0 +1,111 @@
+<script>
+$(function () {
+	var lap = new Array();
+	var sur = new Array();
+	var app = new Array();
+	var ind,usa,ita,fra;
+	
+	var data = $.grep(jsonData, function(element, index) {
+		return element.policy;
+	});
+		
+	function setZero() {
+		ind = 0;
+		fra = 0;
+		usa = 0;
+		ita = 0;
+	}
+	
+	function pushArray(i) {
+		switch(data[i].country) {
+			case "India"  : ind++;
+							break;
+			case "USA"	  : usa++;
+							break;
+			case "Italy"  : ita++;
+							break;
+			case "France" :	fra++;
+							break;
+		}
+	}
+
+	setZero();
+	for (var i = 0; i < data.length; i++) {
+		if (data[i].policy.type == "Life") {
+			if(data[i].policy.status=="Approved") {
+				pushArray(i);
+			}
+		}
+	}
+	app.push(ind,usa,ita,fra);
+	
+	setZero();
+	for (var i = 0; i < data.length; i++) {
+		if (data[i].policy.type == "Life") {
+			if(data[i].policy.status=="Surrendered") {
+				pushArray(i);
+			}
+		}
+	}
+	sur.push(ind,usa,ita,fra);
+	
+	setZero();
+	for (var i = 0; i < data.length; i++) {
+		if (data[i].policy.type == "Life") {
+			if(data[i].policy.status=="Lapsed") {
+				pushArray(i);
+			}
+		}
+	}
+	lap.push(ind,usa,ita,fra);
+	
+		$('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Policy Type: Life'
+        },
+        xAxis: {
+            categories: ['India','USA','Italy','France'],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Policies'
+            }
+        },
+        tooltip: {
+        	pointFormat: '{series.name}: <b>{point.y}</b>'	
+        },
+        plotOptions: {
+        	dataLabels: {
+    			enabled: true,
+    			format: '<b>{point.name}</b>',
+    			style: {
+        			color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+    			}
+			},
+            column: {
+            	dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: 'Approved',
+            data: app
+        }, {
+            name: 'Surrendered',
+            data: sur
+
+        }, {
+            name: 'Lapsed',
+            data: lap
+
+        }]
+    });
+});
+</script>
+<div id="container"></div>

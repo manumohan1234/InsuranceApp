@@ -1,89 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
 <script>
 $(function () {
 	var lap = new Array();
 	var sur = new Array();
 	var app = new Array();
-	var app_ind = 0,
-		app_ita = 0,
-		app_usa = 0,
-		app_fra = 0,
-		sur_ind = 0,
-		sur_ita = 0,
-		sur_usa = 0,
-		sur_fra = 0,
-		lap_ind = 0,
-		lap_ita = 0,
-		lap_usa = 0,
-		lap_fra = 0;
+	var ind,usa,ita,fra;
 	
 	var data = $.grep(jsonData, function(element, index) {
 		return element.policy;
 	});
 		
-	function pushApp(i) {
+	function setZero() {
+		ind = 0;
+		fra = 0;
+		usa = 0;
+		ita = 0;
+	}
+	
+	function pushArray(i) {
 		switch(data[i].country) {
-			case "India"  : app_ind++;
+			case "India"  : ind++;
 							break;
-			case "USA"	  : app_usa++;
+			case "USA"	  : usa++;
 							break;
-			case "Italy"  : app_ita++;
+			case "Italy"  : ita++;
 							break;
-			case "France" :	app_fra++;
+			case "France" :	fra++;
 							break;
 		}
 	}
-	function pushSur(i) {
-		switch(data[i].country) {
-			case "India"  : sur_ind++;
-							break;
-			case "USA"	  : sur_usa++;
-							break;
-			case "Italy"  : sur_ita++;
-							break;
-			case "France" :	sur_fra++;
-							break;
-		}
-	}
-	function pushLap(i) {
-		switch(data[i].country) {
-			case "India"  : lap_ind++;
-							break;
-			case "USA"	  : lap_usa++;
-							break;
-			case "Italy"  : lap_ita++;
-							break;
-			case "France" :	lap_fra++;
-							break;
-		}
-	}
+
+	setZero();
 	for (var i = 0; i < data.length; i++) {
 		if (data[i].policy.type == "Vehicle") {
-			if(data[i].policy.status=="approved") {
-				pushApp(i);
-			}
-			else if(data[i].policy.status=="surrendered") {
-				pushSur(i);
-			}
-			else if(data[i].policy.status=="lapsed") {
-				pushLap(i);
+			if(data[i].policy.status=="Approved") {
+				pushArray(i);
 			}
 		}
 	}
+	app.push(ind,usa,ita,fra);
 	
+	setZero();
+	for (var i = 0; i < data.length; i++) {
+		if (data[i].policy.type == "Vehicle") {
+			if(data[i].policy.status=="Surrendered") {
+				pushArray(i);
+			}
+		}
+	}
+	sur.push(ind,usa,ita,fra);
 	
-	app.push(app_ind,app_usa,app_ita,app_fra);
-	sur.push(sur_ind,sur_usa,sur_ita,sur_fra);
-	lap.push(lap_ind,lap_usa,lap_ita,lap_fra);
-	console.log(app,lap,sur);
-    $('#container').highcharts({
+	setZero();
+	for (var i = 0; i < data.length; i++) {
+		if (data[i].policy.type == "Vehicle") {
+			if(data[i].policy.status=="Lapsed") {
+				pushArray(i);
+			}
+		}
+	}
+	lap.push(ind,usa,ita,fra);
+	
+	$('#container').highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Policy Type: Medical'
+            text: 'Policy Type: Vehicle'
         },
         xAxis: {
             categories: ['India','USA','Italy','France'],
@@ -96,7 +77,7 @@ $(function () {
             }
         },
         tooltip: {
-        	pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'	
+        	pointFormat: '{series.name}: <b>{point.y}</b>'	
         },
         plotOptions: {
         	dataLabels: {
@@ -127,8 +108,4 @@ $(function () {
     });
 });
 </script>
-</head>
-<body>
 <div id="container"></div>
-</body>
-</html>

@@ -1,12 +1,3 @@
-$(document).ready(function(){
-	$("#chartDiv").load("Home.html");
-	$("#salesByType").click(function(){
-			
-	});
-	$("#home").click(function(){
-		$("#chartDiv").load("Home.html");
-	});
-});
 
 var countryData = [{"label":"India", "value":"India"},
                    {"label":"USA", "value":"USA"},
