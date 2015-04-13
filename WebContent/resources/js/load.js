@@ -1,0 +1,10 @@
+$(document).ready(function(){
+	$("#chartContainerDiv").load("Home.html");
+	$("#salesByType").click(function(){
+		$("#chartContainerDiv").empty();
+		$("#chartContainerDiv").load("Sales-By-Type.html");	
+	});
+	$("#home").click(function(){
+		$("#chartContainerDiv").load("Home.html");
+	});
+});

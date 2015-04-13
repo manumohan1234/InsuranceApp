@@ -1,0 +1,169 @@
+<script type="text/javascript">
+	$(function() {
+		var lap = new Array();
+		var app = new Array();
+		var sur = new Array();
+		var i;
+		var tvm, blore, mum, hyd, pune, ny, la, chic, hous, sanf, rom, ven, mil, nap, flo, par, mars, lyon, toul, str;
+
+		function init() {
+			tvm = 0;
+			blore = 0;
+			mum = 0;
+			hyd = 0;
+			pune = 0;
+			ny = 0;
+			la = 0;
+			chic = 0;
+			hous = 0;
+			sanf = 0;
+			rom = 0;
+			ven = 0;
+			mil = 0;
+			nap = 0;
+			flo = 0;
+			par = 0;
+			mars = 0;
+			lyon = 0;
+			toul = 0;
+			str = 0;
+		}
+
+		function pushArray(i) {
+			switch (jsonData[i].city) {
+			case "Trivandrum":
+				tvm++;
+				break;
+			case "Banglore":
+				blore++;
+				break;
+			case "Mumbai":
+				mum++;
+				break;
+			case "Hyderabad":
+				hyd++;
+				break;
+			case "Pune":
+				pune++;
+				break;
+			case "New York":
+				ny++;
+				break;
+			case "Los Angeles":
+				la++;
+				break;
+			case "Chicago":
+				chic++;
+				break;
+			case "Houston":
+				hous++;
+				break;
+			case "San Francisco":
+				sf++;
+				break;
+			case "Rome":
+				rome++;
+				break;
+			case "Venice":
+				ven++;
+				break;
+			case "Milan":
+				mil++;
+				break;
+			case "Naples":
+				nap++;
+				break;
+			case "Florence":
+				flo++;
+				break;
+			case "Paris":
+				par++;
+				break;
+			case "Marseille":
+				mar++;
+				break;
+			case "Lyon":
+				lyon++;
+				break;
+			case "Toulouse":
+				toul++;
+				break;
+			case "Strasbourg":
+				str++;
+				break;
+			}
+		}
+
+		init();
+		for (var i = 0; i < jsonData.length; i++) {
+			if (jsonData[i].policy.type == "Vehicle") {
+				if (jsonData[i].policy.status == "Approved") {
+					pushArray(i);
+				}
+			}
+		}
+		app.push(tvm, blore, mum, hyd, pune, ny, la, chic, hous, sanf, rom,
+				ven, mil, nap, flo, par, mars, lyon, toul, str);
+
+		init();
+		for (var i = 0; i < jsonData.length; i++) {
+			if (jsonData[i].policy.type == "Vehicle") {
+				if (jsonData[i].policy.status == "Surrendered") {
+					pushArray(i);
+				}
+			}
+		}
+		sur.push(tvm, blore, mum, hyd, pune, ny, la, chic, hous, sanf, rom,
+				ven, mil, nap, flo, par, mars, lyon, toul, str);
+
+		init();
+		for (var i = 0; i < jsonData.length; i++) {
+			if (jsonData[i].policy.type == "Vehicle") {
+				if (jsonData[i].policy.status == "Lapsed") {
+					pushArray(i);
+				}
+			}
+		}
+		lap.push(tvm, blore, mum, hyd, pune, ny, la, chic, hous, sanf, rom,
+				ven, mil, nap, flo, par, mars, lyon, toul, str);
+
+		$('#lineChart').highcharts(
+				{
+					chart : {
+						type : 'bar'
+					},
+					title : {
+						text : 'Policy Type : Vehicle'
+					},
+					xAxis : {
+						categories : [ 'Trivandrum', 'Banglore', 'Mumbai',
+								'Hyderabad', 'Pune', 'New York', 'Los Angeles',
+								'Chicago', 'Houston', 'San Francisco', 'Rome',
+								'Venice', 'Milan', 'Naples', 'Florence',
+								'Paris', 'Marseille', 'Lyon', 'Toulouse',
+								'Strasbourg' ]
+					},
+					yAxis : {
+						min : 0,
+						title : {
+							text : 'No. of Policies'
+						},
+					},
+					legend : {
+						reversed : true
+					},
+					series : [ {
+						name : 'Lapsed',
+						data : lap
+					}, {
+						name : 'Surrendered',
+						data : sur
+					}, {
+						name : 'Approved',
+						data : app
+					} ]
+				});
+	});
+</script>
+<div id="lineChart"
+	style="min-width: 310px; height: 400px; margin: 0 auto"></div>

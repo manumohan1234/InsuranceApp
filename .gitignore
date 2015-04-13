@@ -1,1 +1,17 @@
-/bin/
+# ignore all bin directories
+bin/
+
+# ignore all target directories
+target/
+
+# ignore .classpath file
+.classpath
+
+# ignore eclipse project file
+.project
+
+# ignore eclipse settings folder
+.settings/
+
+# ignore eclipse .metadata folder
+.metadata/
