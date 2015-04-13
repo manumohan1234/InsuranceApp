@@ -98,61 +98,59 @@
 		}
 		lap.push(tvm, blore, mum, hyd, pune, ny, la, chic, hous, sanf, rom, ven, mil, nap, flo, par, mars, lyon, toul, str);
 
-		$('#lineChart')
-				.highcharts(
-						{
-							title : {
-								text : 'Policy Status'
-							},
-							xAxis : {
-								categories : [ 
-								               'Trivandrum',
-								               'Banglore',
-								               'Mumbai',
-								               'Hyderabad',
-								               'Pune',
-								               'New York',
-								               'Los Angeles',
-								               'Chicago',
-								               'Houston',
-								               'San Francisco',
-								               'Venice',
-								               'Milan',
-								               'Naples',
-								               'Florence',					
-											   'Marseille',
-											   'Lyon',
-											   'Toulouse',
-											   'Strasbourg' ]
-							},
-							yAxis : {
-								min : 0,
-								title : {
-									text : 'No. of Policies'
-								},
-								plotLines : [ {
-									value : 0,
-									width : 1,
-									color : '#808080'
-								} ]
-							},
-							legend : {
-								layout : 'vertical',
-								align : 'right',
-								verticalAlign : 'middle',
-								borderWidth : 0
-							},
-							series : [ {
-								name : 'Lapsed',
-								data : lap
-							}, {
-								name : 'Surrendered',
-								data : sur
-							}, {
-								name : 'Approved',
-								data : app
-							} ]
-						});
+		$('#lineChart').highcharts({
+			chart: {
+		    	type: 'bar'
+		    },
+			title : {
+				text : 'Policy Status'
+			},
+			xAxis : {
+				categories : [ 
+					'Trivandrum',
+					'Banglore',
+					'Mumbai',
+					'Hyderabad',
+					'Pune',
+					'New York',
+					'Los Angeles',
+					'Chicago',
+					'Houston',
+					'San Francisco',
+					'Venice',
+					'Milan',
+					'Naples',
+					'Florence',					
+					'Marseille',
+					'Lyon',
+					'Toulouse',
+					'Strasbourg' ]
+			},
+			yAxis : {
+				min : 0,
+				title : {
+					text : 'No. of Policies'
+				},
+				/* plotLines : [ {
+					value : 0,
+					width : 1,
+					color : '#808080'
+				} ] */
+			},
+			legend: {
+	            reversed: true
+	        },
+			series : [ {
+				name : 'Lapsed',
+				data : lap
+			}, {
+				name : 'Surrendered',
+				data : sur
+			}, {
+				name : 'Approved',
+				data : app
+			} ]
+		});
 	});
 </script>
 <div id="lineChart"
