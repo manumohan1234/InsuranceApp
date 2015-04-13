@@ -7,13 +7,13 @@
 
 <script type="text/javascript">
 	$(function () { 
-		var brands = $('#filterByCombo option:selected');
+	/* 	var brands = $('#filterByCombo option:selected');
     	var selected = [];
     	$(brands).each(function(index, brand){
     		selected.push([$(this).val()]);
     	});
     	var sel = selected[0];
-        console.log(sel);
+        console.log(sel); */
       /*   sel.val(sel.val().split(" ").join("")); 
         console.log(sel); */
     		    
@@ -71,6 +71,7 @@
                	              /* 	console.log(sel);
                	             	sel = sel.replace(/\s/g,""); */
                	              	console.log(sel);
+               	          
                             	$("#columnChart").load("resources/charts/"+ this.name + sel + ".html");                            
                             }
                         }

@@ -5,13 +5,9 @@ $(function () {
 		app = 0,
 		sur = 0;
 	
-	/* var data = $.grep(jsonData, function(element, index) {
-		return element.policy;
-	}); */
-		
 	for (var i = 0; i < jsonData.length; i++) {
-		if (data[i].policy.type == "Life") {
-			switch(data[i].policy.status) {
+		if (jsonData[i].policy.type == "Life") {
+			switch(jsonData[i].policy.status) {
 				case "Approved"    : app++;
 									 break;
 				case "Surrendered" : sur++;
@@ -21,7 +17,7 @@ $(function () {
 			}
 		}
 	}
-	policy.push(["Approved", app]);
+	policy.push(["Ap proved", app]);
 	policy.push(["Surrendered", sur]);
 	policy.push(["Medical", lap]);
 	

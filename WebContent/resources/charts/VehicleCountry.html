@@ -4,11 +4,7 @@ $(function () {
 	var sur = new Array();
 	var app = new Array();
 	var ind,usa,ita,fra;
-	
-	var data = $.grep(jsonData, function(element, index) {
-		return element.policy;
-	});
-		
+			
 	function setZero() {
 		ind = 0;
 		fra = 0;
@@ -17,7 +13,7 @@ $(function () {
 	}
 	
 	function pushArray(i) {
-		switch(data[i].country) {
+		switch(jsonData[i].country) {
 			case "India"  : ind++;
 							break;
 			case "USA"	  : usa++;
@@ -30,9 +26,9 @@ $(function () {
 	}
 
 	setZero();
-	for (var i = 0; i < data.length; i++) {
-		if (data[i].policy.type == "Vehicle") {
-			if(data[i].policy.status=="Approved") {
+	for (var i = 0; i < jsonData.length; i++) {
+		if (jsonData[i].policy.type == "Vehicle") {
+			if(jsonData[i].policy.status=="Approved") {
 				pushArray(i);
 			}
 		}
@@ -40,9 +36,9 @@ $(function () {
 	app.push(ind,usa,ita,fra);
 	
 	setZero();
-	for (var i = 0; i < data.length; i++) {
-		if (data[i].policy.type == "Vehicle") {
-			if(data[i].policy.status=="Surrendered") {
+	for (var i = 0; i < jsonData.length; i++) {
+		if (jsonData[i].policy.type == "Vehicle") {
+			if(jsonData[i].policy.status=="Surrendered") {
 				pushArray(i);
 			}
 		}
@@ -50,9 +46,9 @@ $(function () {
 	sur.push(ind,usa,ita,fra);
 	
 	setZero();
-	for (var i = 0; i < data.length; i++) {
-		if (data[i].policy.type == "Vehicle") {
-			if(data[i].policy.status=="Lapsed") {
+	for (var i = 0; i < jsonData.length; i++) {
+		if (jsonData[i].policy.type == "Vehicle") {
+			if(jsonData[i].policy.status=="Lapsed") {
 				pushArray(i);
 			}
 		}
