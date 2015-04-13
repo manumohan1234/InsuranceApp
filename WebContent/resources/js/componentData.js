@@ -1,4 +1,3 @@
-
 var countryData = [{"label":"India", "value":"India"},
                    {"label":"USA", "value":"USA"},
                    {"label":"Italy", "value":"Italy"},
@@ -399,13 +398,13 @@ $(function() {
         defaultDate: "01/01/2015"
     });
     $('#datetimepicker7').datetimepicker({
-        defaultDate: "06/04/2015"
+    	defaultDate:new Date()
     });
     $("#datetimepicker6").on("dp.change", function (e) {
-        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
     });
-    $("#datetimepicker7").on("dp.change", function (e) {
-        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    $("#datetimepicker7").on("dp.change", function () {
+        $('#datetimepicker7').data("DateTimePicker").maxDate(new Date());
     });
 	
 

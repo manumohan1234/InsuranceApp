@@ -1,9 +1,5 @@
 @CHARSET "UTF-8";
 
-body {
-	overflow: hidden;
-}
-
 .filtergroup {
 	width: 98%;
 	height: 98%;
@@ -20,14 +16,11 @@ body {
 	height: 34px;
 }
 .row{
-	margin-left:0px;
+	margin-left:10px;
 	padding-top:10px;
 }
-.leftPane{
-	padding:5px;
-}
 .reportBy>li{
-	font:11px;
+	font-size:12px;
 	font-weight:bold;
 }
 #title{
@@ -36,4 +29,21 @@ body {
 }
 .navContainer{
 	overflow:hidden;
+}
+#optionsPane{
+	padding:0px 1px;	
+}
+#lineChart {
+	width: 100%;
+	margin: 0 auto;
+}
+#chartContainerDiv{
+	width: 75%;
+	height: 100%;
+	margin-left:5px;
+}
+#pieChart {
+	width: 50%;
+	height: 100%;
+	margin: 0 auto;
 }
