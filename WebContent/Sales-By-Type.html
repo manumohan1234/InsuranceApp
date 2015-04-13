@@ -7,16 +7,7 @@
 
 <script type="text/javascript">
 $(function () { 
-		var brands = $('#filterByCombo option:selected');
-    	var selected = [];
-    	$(brands).each(function(index, brand){
-    		selected.push([$(this).val()]);
-    	});
-    	var sel = selected[0];
-        console.log(sel);
-      /*   sel.val(sel.val().split(" ").join("")); 
-        console.log(sel); */
-    		    
+
 	    var processed_json = new Array();
 		var life_count,med_count,veh_count;
 		$.map(jsonData, function(obj, i) {
