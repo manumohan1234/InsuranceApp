@@ -66,12 +66,11 @@ $(function () {
                             	$(brands).each(function(index, brand){
                             		selected.push([$(this).val()]);
                             	});
-                            	console.log(selected);
-                            	var sel = selected[0];
-               	              /* 	console.log(sel);
-               	             	sel = sel.replace(/\s/g,""); */
-               	              	console.log(sel);
-                            	$("#columnChart").load("resources/charts/"+ this.name + sel + ".html");                            
+                            	var sel = selected[0].toString();
+                            	console.log("sel:"+sel);
+                            	sel=sel.replace(/\s+/g,"");
+                            	console.log("resources/charts/"+ this.name + sel + ".html")
+                              	$("#columnChart").load("resources/charts/"+ this.name + sel + ".html");                            
                             }
                         }
                 	}
