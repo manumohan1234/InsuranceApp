@@ -26,7 +26,7 @@ var genderData = [{"label":"Male", "value":"male"},
                    {"label":"Female", "value":"female"}];
 
 var policyData =  [{"label":"Medical","value":"Medical"},
-                   {"label":"Theft","value":"Theft"},
+                   {"label":"Vehicle","value":"Vehicle"},
                    {"label":"Life","value":"Life"}];
 
 var agentData = [{"label":"Agent 1", "value":"Agent1"},
@@ -263,6 +263,12 @@ var ageSlabData =  [
                   {"label":"51-60","value":"51-60"},
                   {"label":"61+","value":"61+"}
                  ];
+var filterData = [
+                  {"label":"Country","value":"Country"},
+                  {"label":"City","value":"City"},
+                  {"label":"Policy Status","value":"Policy Status"},
+                  {"label":"Gender","value":"Gender"}
+                 ];
 $(function() {
 	$('#countryCombo').multiselect(
 			{
@@ -438,6 +444,24 @@ $(function() {
 
 	$("#salesFilterDiv").hide();
 	$("#soldFilterDiv").hide();
+	
+	$('#filterByCombo').multiselect({
+		includeSelectAllOption : true,
+		buttonClass : 'btn btn-default col-sm-12 btn-sm',
+		numberDisplayed : 1,
+		buttonWidth : '100%',
+		nonSelectedText : "All",
+		dataprovider : filterData,
+		onChange : function(option, checked) { 
+			var brands = $('#filterByCombo option:selected');
+        	var selected = [];
+        	$(brands).each(function(index, brand){
+        		selected.push([$(this).val()]);
+        	});
+        	console.log(selected);
+		}
+	});
+	$('#filterByCombo').multiselect('dataprovider', filterData);
 });
 
 

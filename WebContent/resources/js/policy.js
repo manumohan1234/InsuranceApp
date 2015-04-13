@@ -11,7 +11,7 @@ var jsonData = [
                 "type": "Life",
                 "start_date": "29-March-2015",
                 "end_date": "30-January-2020",
-                "status": "approved"
+                "status": "Approved"
             },
             "agent": {
                 "name": "Agent1",
@@ -31,7 +31,7 @@ var jsonData = [
                 "type": "Medical",
                 "start_date": "30-April-2015",
                 "end_date": "20-February-2018",
-                "status": "lapsed"
+                "status": "Lapsed"
             },
           "agent": {
                 "name": "Agent2",
@@ -51,7 +51,7 @@ var jsonData = [
                 "type": "Vehicle",
                 "start_date": "9-January-2014",
                 "end_date": "9-January-2016",
-                "status": "surrendered"
+                "status": "Surrendered"
             },
           "agent": {
                 "name": "Agent3",
@@ -71,7 +71,7 @@ var jsonData = [
                 "type": "Life",
                 "start_date": "15-June-2015",
                 "end_date": "1-April-2025",
-                "status": "approved"
+                "status": "Approved"
             },
           "agent": {
                 "name": "Agent1",
@@ -91,7 +91,7 @@ var jsonData = [
                 "type": "Medical",
                 "start_date": "20-September-2014",
                 "end_date": "10-July-2021",
-                "status": "lapsed"
+                "status": "Lapsed"
             },
           "agent": {
                 "name": "Agent2",
@@ -111,7 +111,7 @@ var jsonData = [
                 "type": "Vehicle",
                 "start_date": "9-August-2013",
                 "end_date": "30-June-2020",
-                "status": "surrendered"
+                "status": "Surrendered"
             },
           "agent": {
                 "name": "Agent3",
@@ -131,7 +131,7 @@ var jsonData = [
                 "type": "Life",
                 "start_date": "19-April-2015",
                 "end_date": "7-December-2018",
-                "status": "approved"
+                "status": "Approved"
             },
           "agent": {
                 "name": "Agent1",
@@ -151,7 +151,7 @@ var jsonData = [
                 "type": "Medical",
                 "start_date": "15-June-2014",
                 "end_date": "26-April-2018",
-                "status": "lapsed"
+                "status": "Lapsed"
             },
           "agent": {
                 "name": "Agent2",
@@ -171,7 +171,7 @@ var jsonData = [
                 "type": "Vehicle",
                 "start_date": "29-March	-2015",
                 "end_date": "30-January-2020",
-                "status": "surrendered"
+                "status": "Surrendered"
             },
           "agent": {
                 "name": "Agent3",
@@ -191,7 +191,7 @@ var jsonData = [
                 "type": "Life",
                 "start_date": "29-March-2015",
                 "end_date": "18-April-2025",
-                "status": "approved"
+                "status": "Approved"
             },
           "agent": {
                 "name": "Agent1",

@@ -3,11 +3,11 @@
 		var lap = new Array();
 		var app = new Array();
 		var sur = new Array();
+		var i;
 		var jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
 		var data = $.grep(jsonData, function(element, index) {
-			return element.policy.start_date;
+			return element;
 		});
-
 		function init() {
 			jan = 0;
 			feb = 0;
@@ -65,24 +65,24 @@
 		}
 
 		init();
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].policy.status == "approved") {
+		for (i = 0; i < data.length; i++) {
+			if (data[i].policy.status == "Approved") {
 				pushArray(i);
 			}
 		}
 		app.push(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
 
 		init();
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].policy.status == "surrendered") {
+		for (i = 0; i < data.length; i++) {
+			if (data[i].policy.status == "Surrendered") {
 				pushArray(i);
 			}
 		}
 		sur.push(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
 
 		init();
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].policy.status == "lapsed") {
+		for (i = 0; i < data.length; i++) {
+			if (data[i].policy.status == "Lapsed") {
 				pushArray(i);
 			}
 		}
@@ -99,6 +99,7 @@
 										'Oct', 'Nov', 'Dec' ]
 							},
 							yAxis : {
+								min : 0,
 								title : {
 									text : 'No. of Policies'
 								},
