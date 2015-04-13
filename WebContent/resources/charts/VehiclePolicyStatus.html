@@ -1,0 +1,61 @@
+<script>
+$(function () {
+	var policy = new Array();
+	var lap = 0,
+		app = 0,
+		sur = 0;
+	
+	for (var i = 0; i < jsonData.length; i++) {
+		if (jsonData[i].policy.type == "Vehicle") {
+			switch(jsonData[i].policy.status) {
+				case "Approved"    : app++;
+									 break;
+				case "Surrendered" : sur++;
+									 break;
+				case "Lapsed"	   : lap++;
+									 break;
+			}
+		}
+	}
+	policy.push(["Approved", app]);
+	policy.push(["Surrendered", sur]);
+	policy.push(["Lapsed", lap]);
+	
+	$('#container').highcharts({
+		chart: {
+        	type: 'pie',
+        	options3d: {
+				enabled: true,
+            	alpha: 60,
+            	beta: 0,
+        	}
+    	},
+    	title: {
+    		text: 'Policy Type: Vehicle'
+    	},
+    	tooltip: {
+    		pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    	},
+       	plotOptions: {
+	   	   	pie: {
+	    		depth: 30,
+	        	allowPointSelect: true,
+            	cursor: 'pointer',
+            	dataLabels: {
+            		enabled: true,
+            		format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            		style: {
+               			color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            		}
+            	},
+            }
+    	},
+        series: [{
+	    	type: 'pie',
+        	name: 'Policy Status',
+	     	data: policy
+    	}]
+	});
+});
+</script>
+<div id="container"></div>
