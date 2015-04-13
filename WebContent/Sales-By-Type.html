@@ -57,12 +57,8 @@
                             		selected.push([$(this).val()]);
                             	});
                             	console.log(selected);
-                            	var sel = selected[0];
-               	              /* 	console.log(sel);
-               	             	sel = sel.replace(/\s/g,""); */
-               	              	console.log(sel);
-               	          
-                            	$("#columnChart").load("resources/charts/"+ this.name + sel + ".html");                            
+                            	          	          
+                            	$("#columnChart").load("resources/charts/"+ this.name + selected + ".html");                            
                             }
                         }
                 	}
