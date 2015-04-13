@@ -4,11 +4,12 @@
 
 <script src="resources/js/bootstrap-multiselect.js"></script>
 <script src="resources/js/componentData.js"></script>
-
+<script src="resources/js/sales-load.js"></script>
 <script type="text/javascript">
-$(function () { 
 
+$(function () { 
 	    var processed_json = new Array();
+
 		var life_count,med_count,veh_count;
 		$.map(jsonData, function(obj, i) {
 			life_count =  $.grep(jsonData, function (element, index) { 
@@ -62,6 +63,7 @@ $(function () {
                             	sel=sel.replace(/\s+/g,"");
                             	console.log("resources/charts/"+ this.name + sel + ".html")
                               	$("#columnChart").load("resources/charts/"+ this.name + sel + ".html");                            
+
                             }
                         }
                 	}
